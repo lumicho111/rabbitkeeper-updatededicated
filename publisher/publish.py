@@ -69,10 +69,12 @@ def assemble(request, read_file, directory, key_bytes):
 
 def publish(request, outputs, api, commit):
     wanted=request['release']; tag=wanted['tag']
+    marker='<!-- rabbit-float-publisher:'+tag+' -->'
+    notes=wanted['notes']+'\n\n'+marker
     releases=api('GET','/releases?per_page=100')
-    matches=[r for r in releases if r['tag_name']==tag]
+    matches=[r for r in releases if r['tag_name']==tag or (r['draft'] and marker in (r.get('body') or '')) or (r['draft'] and r['id']==wanted.get('existing_draft_id'))]
     require(len(matches)<=1, 'Ambiguous release tag')
-    release=matches[0] if matches else api('POST','/releases',{'tag_name':tag,'target_commitish':commit,'name':wanted['title'],'body':wanted['notes'],'draft':True,'prerelease':False})
+    release=matches[0] if matches else api('POST','/releases',{'tag_name':tag,'target_commitish':commit,'name':wanted['title'],'body':notes,'draft':True,'prerelease':False})
     existing=api('GET',f"/releases/{release['id']}/assets?per_page=100")
     for asset, path in outputs:
         same=[a for a in existing if a['name']==asset['name']]
@@ -84,7 +86,7 @@ def publish(request, outputs, api, commit):
             uploaded=api('UPLOAD',f"/releases/{release['id']}/assets?name="+urllib.parse.quote(asset['name'],safe=''),path.read_bytes())
             require(uploaded.get('size')==asset['size'] and uploaded.get('digest')=='sha256:'+asset['sha256'], 'Uploaded attachment hash mismatch')
     if release['draft']:
-        release=api('PATCH',f"/releases/{release['id']}",{'name':wanted['title'],'body':wanted['notes'],'draft':wanted['draft'],'prerelease':False,**({} if wanted['draft'] else {'make_latest':'true'})})
+        release=api('PATCH',f"/releases/{release['id']}",{'tag_name':tag,'name':wanted['title'],'body':notes,'draft':wanted['draft'],'prerelease':False,**({} if wanted['draft'] else {'make_latest':'true'})})
     else:
         require(not wanted['draft'], 'Public release exists; refusing to turn it into a draft')
     print(('Draft publication verified: ' if wanted['draft'] else 'Published: ')+release['html_url'])

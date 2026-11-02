@@ -5,7 +5,8 @@
     "tag": "publisher-check-20261102",
     "title": "自动发布连接验证（草稿）",
     "notes": "仅验证自动创建 Release、上传签名附件与校验。不作为正式更新发布，小手机不会检测到此草稿。附件复用既有 002 验证包，不包含新功能。",
-    "draft": true
+    "draft": true,
+    "existing_draft_id": 431263402
   },
   "assets": [
     {
