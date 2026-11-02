@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "repository": "lumicho111/rabbitkeeper-updatededicated",
+  "release": {
+    "tag": "publisher-check-20261102",
+    "title": "自动发布连接验证（草稿）",
+    "notes": "仅验证自动创建 Release、上传签名附件与校验。不作为正式更新发布，小手机不会检测到此草稿。附件复用既有 002 验证包，不包含新功能。",
+    "draft": true
+  },
+  "assets": [
+    {
+      "name": "rabbit-float-build6-resource-002-verify.zip",
+      "size": 7319,
+      "sha256": "b4114b1c8cb07d4979b907360666ea8c6e6a629ec720c8d42881354bb8c98748",
+      "parts": [
+        {
+          "path": "publisher/payloads/connection-check/000.b64",
+          "sha256": "1bfe66edff9db4c66fd1bdc7cef575b96316ca5b8377edba633b7a8814aa85e3"
+        }
+      ]
+    }
+  ]
+}
