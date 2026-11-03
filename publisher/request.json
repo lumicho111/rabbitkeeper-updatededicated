@@ -2,68 +2,68 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-008",
-    "title": "资源008 · 查手机权限与双页浏览器",
-    "notes": "兔版 Float · 资源更新 008\n适配 APK 1.0.6 / nativeBuild 8。本包累计包含 007 的截图边缘修复。\n\n安装：小手机 设置 → 关于与更新 → 导入更新包，选择 rabbit-float-build8-resource-008.zip。\n不需要卸载或清空数据；不要把资源 ZIP 当作 APK 安装。\n\n本次变更\n1. 修复朋友圈滑动后实际页面与内部状态不一致；购物/外卖翻页跟随屏幕定位；阅读仅提供实际可见正文，无书不打开书籍。\n2. 查阅结束和最后回复生成分开处理。最后回复失败保留错误与重试入口，不把已完成的查看恢复成正在查看。\n3. 聊天列表从右向左滑，显示置顶/取消置顶、隐藏/取消隐藏、删除对话。按当前日夜主题使用灰色。\n4. 删除对话仅移除消息列表入口，保留线上线下记录与联系人；从联系人查看不恢复，发出新消息（线上或线下）后恢复。原有清空与彻底删除操作不变。\n5. 隐藏发现采用每次查阅每个隐藏会话一次 10% 概率，不反复重抽。联系人可打开已存在且可见的会话，仍最多查看最近50条。\n6. 聊天信息新增每角色独立权限：主动申请（默认关闭）和偷偷查看（默认关闭），不依赖状态栏。\n7. 主动申请在正常聊天本轮内按人设判断，不增加专门念头调用。用户同意后进入查看；拒绝只传递未允许的事实，反应按人设与上下文生成。\n8. 偷偷查看按随机间隔机械执行，无前置动画、不控制页面、不追加欲望判断调用。默认间隔2至8天，冷却8小时，每日上限1次，均可调。每轮结束后先冷却，再等待本轮随机间隔。关闭时不补跑多轮。\n9. 偷看每次随机抽取至多3类已有内容，共享10000字符资料上限；跳过近期完全相同的资料。无书不选阅读，阅读仅采集书名与已保存进度。资料在随后正常聊天作为实际观察来源注入，不自动宣布偷看。运行错误与部分成功保存在设置中的运行记录，清空该记录会移除关联偷看来源，不会抹去已经另存的聊天或长期记忆。\n10. 用户端新增浏览器入口。角色端保留已有普通浏览器，第二页加入新媒体网页，不占8个可选App名额。滑动或底部圆点切页，底栏返回桌面。\n11. 第二页支持搜索8至10条、推荐5至8条、加载更多、收藏完整条目、搜索历史单条删除；详情包含通用敏感内容封面、装饰播放器、标题作者标签、简介及3至5条评论。\n12. 标题、简介与评论可原位切换中文/原文；偏好包括内容组合多选、排除项、长自定义提示词。排除优先。用户与每角色数据独立保存。条目为虚构的非露骨文字媒体内容，不播放视频、不访问真实外部站点。\n13. 角色反查或偷看用户浏览器时，只读取已有保存内容；空页面只表明网站外观，不虚构搜索和观看。\n14. 输入框上方状态改为无胶囊小字；占位改为“TA正在看 不准动哦…”。继承006的拖动半透明双语心声、灵动岛、抢手机，以及相册/朋友圈/系统分享。\n\n验证\n- TypeScript 检查和移动端 Vite 生产构建通过。\n- 最新50条、删除来源、隐藏边界、抢手机中断、查手机访问权限等原有回归通过。\n- 新增路由回归：朋友圈→结束，朋友圈滑动返回，购物→外卖→书架→书籍，空书架，结束回复失败，联系人进入会话。\n- 新增权限、流式内部标记隐藏、调度间隔+冷却、无导航机械偷看、收藏与筛选存储测试通过。\n- 390×844 实际React组件交互验证：原位翻译、详情/评论、收藏、偏好保存、返回桌面、左滑置顶。\n- 更新包另用原签名APK基线验证签名、暂存、激活及markReady。\n\n验证边界\n没有调用用户的真实API，也没有实体安卓机。本轮不新增原生接口；原有相册分享与冷启动锁屏首次按键仍需实际设备确认。\n源码保留原始1.0.6/build8资源基线，不能以新dist覆盖基线清单。签名私钥不包含在源码包内。\n",
+    "tag": "resource-009",
+    "title": "资源更新 009 · 电量同步与浏览器完善",
+    "notes": "兔版 Float 资源更新 009（适用 APK 1.0.6 / build8）\n\n安装：设置 → 关于与更新 → 检查更新。无需重装 APK。\n\n• 模拟状态栏改为读取设备电量及充电状态，电量变化和回到应用时更新。使用 Android WebView 的 Battery Status API；不支持读取的网页环境显示空电池，不伪造电量。\n• 长按多选底栏跟随 Chat 日夜模式：深色底浅色图标、浅色底深色图标，禁用项保持可辨认。\n• 聊天列表左滑操作固定在聊天行后方，跟手逐步露出，收回后不透出按钮。\n• 隐藏聊天继续留在列表原位，以变浅表示隐藏；取消隐藏立即恢复，不需从联系人重新打开。查手机时的隐藏判定保持原规则。\n• 修正“偷偷查看运行记录”入口字号和排版，以及深色 Chat 状态栏时间对比度。\n• 浏览器移除角色端重复顶部安全区，普通页面背景延伸至状态区；网站页面保持深色。详情与设置底部均可完整滚动查看。\n• 角色端网站搜索栏只展开/收起搜索记录，禁用输入与搜索按钮，仅刷新生成。刷新结合人设、上下文、记忆、独立偏好及共享提示词，生成5–8条搜索记录和5–8条浏览记录。\n• 自定义长提示词在用户端与角色端共享；内容组合的喜欢/排除设置各自独立。\n• 角色端收藏持久保存，也可手动收藏和删除。每次刷新可按角色偏好从上一批浏览记录中选1–2条加入收藏；首次可从新批次选择。收藏最多20条，满额时优先随机替换自动收藏；手动收藏优先保留，全部手动收藏时不自动挤掉它们。\n• 两端详情页加入与收藏并列的删除入口：删浏览记录不会连带删收藏，删收藏不会连带删浏览记录。\n• 生成任务不再固定为恋爱/影视题材；仍保留JSON格式、条数、翻译字段、偏好排除和非露骨内容边界。\n\n验证：TypeScript、生产构建、浏览器数据/电量监听测试、查手机与反查路由及权限回归；真实组件浏览器交互检查。未使用用户 API 密钥，未作真实 Android 手机实机验证。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build8-resource-008.zip",
-      "size": 3848839,
-      "sha256": "a8249be73b5564c640c59585b542608c2dde8b6160cd840ef6025f3ce933599e",
+      "name": "rabbit-float-build8-resource-009.zip",
+      "size": 3850379,
+      "sha256": "e6c271fbde4d465fa9e5f4a59536a7c1e744ae8e054a7cdeb9d8d254b50689a8",
       "parts": [
         {
-          "path": "publisher/payloads/resource-008/000.b64",
-          "sha256": "383c5503940a413a10515dafe8b165a422f35bfb1c7a3329578bdfdc2694c7fd"
+          "path": "publisher/payloads/resource-009/000.b64",
+          "sha256": "c34ea5a29d655528848c99ba26448c182c56cba5072dc11dde1f1fdd6b74bab6"
         },
         {
-          "path": "publisher/payloads/resource-008/001.b64",
-          "sha256": "55376d3cccd4a84bf693d5324a6d58a4ade13a4f0d6869ac0a5a5c1f661dc5aa"
+          "path": "publisher/payloads/resource-009/001.b64",
+          "sha256": "0f193596be6b13bcfa1256b53c37f18ea52875b2409a891baf0c6a9c2d63b40b"
         },
         {
-          "path": "publisher/payloads/resource-008/002.b64",
-          "sha256": "1ce7ade26f3e80cf0ce761639be1b6c78e0245da98b4efe14648361a5434b360"
+          "path": "publisher/payloads/resource-009/002.b64",
+          "sha256": "654da2821a324b3f67b34f5323942efaf73fe2f66590d82546af19e7d6c56384"
         },
         {
-          "path": "publisher/payloads/resource-008/003.b64",
-          "sha256": "4ef88b3476d0874cf01206820a8fc7d5ce0ae29cac9600ae73503e54722243fa"
+          "path": "publisher/payloads/resource-009/003.b64",
+          "sha256": "ca8105b2d6d3f286cc76d6bd06d13a1735347a50ff41b97ef4b1e9120c32520e"
         },
         {
-          "path": "publisher/payloads/resource-008/004.b64",
-          "sha256": "f9bd19f65cfd54b5a95548be99eb190210c5c6da6db9475b6c914cc379953aba"
+          "path": "publisher/payloads/resource-009/004.b64",
+          "sha256": "a098543c2564299f92d3d80dc60251cd0d4c31f33e787914ff1c5b2c3a283aa0"
         },
         {
-          "path": "publisher/payloads/resource-008/005.b64",
-          "sha256": "67e1ff171b725615947a1dd39863dbd08123c61df485f2cbeaa5b5d00672ac88"
+          "path": "publisher/payloads/resource-009/005.b64",
+          "sha256": "577bbfb4469fa6a3fc7ea88497a7ea5b1c3a6591c5c9e070e55ec90c442bcbe7"
         },
         {
-          "path": "publisher/payloads/resource-008/006.b64",
-          "sha256": "a5de25c83c6dfc4ae2d29a74b379f0f6c8ee8a93f6a83dd10ca8d49ff3cf59ee"
+          "path": "publisher/payloads/resource-009/006.b64",
+          "sha256": "5000d2abaafcac4c3696a148d77af34a5180bbbc9c2eeb2d2914fc45f87b8efd"
         },
         {
-          "path": "publisher/payloads/resource-008/007.b64",
-          "sha256": "7e263a8e4d92daf1e7bae5de448cae74382800fef965e399c93defdc4d2579f1"
+          "path": "publisher/payloads/resource-009/007.b64",
+          "sha256": "acf1406fa927cd9b7704310f852f91ce8602bebf41e040076dcaebe0f4f67754"
         },
         {
-          "path": "publisher/payloads/resource-008/008.b64",
-          "sha256": "164f32ef8889ae43485dff1c7690150471cc2eb5106c0cd592c5dcd8c437d36f"
+          "path": "publisher/payloads/resource-009/008.b64",
+          "sha256": "3d10bf9fb875ac1de3c38733cf6bb654b141e7b19fac2b035caeb377f77847ae"
         },
         {
-          "path": "publisher/payloads/resource-008/009.b64",
-          "sha256": "234f69edfdde0436f30f71e7588dacb712ff27577f44c36aa92c8627b3d2503a"
+          "path": "publisher/payloads/resource-009/009.b64",
+          "sha256": "2ea0459b9bd437fec475cc9fdb580fb79dc60278c8674e95a209b820c42b5f43"
         },
         {
-          "path": "publisher/payloads/resource-008/010.b64",
-          "sha256": "b61f008c67737259bdb572d97f71f2a38f01e9ee609daf9e8e5769d865241d8b"
+          "path": "publisher/payloads/resource-009/010.b64",
+          "sha256": "ac10ce9b27271e707f8546d785ef97f16241b9cb52ddd6e60ff1b38c0471beef"
         },
         {
-          "path": "publisher/payloads/resource-008/011.b64",
-          "sha256": "4eb11b0b66484023cf92e87181731af1d796983bebe05bdff0759759135c3e67"
+          "path": "publisher/payloads/resource-009/011.b64",
+          "sha256": "5679ab0a9a9957355d8faead74424f4f9e12844226808e1139886d58b399cca9"
         },
         {
-          "path": "publisher/payloads/resource-008/012.b64",
-          "sha256": "80c412eb36d044ef8abf7075cb8318c9398a6cd6356f5afea646549d8cfc308c"
+          "path": "publisher/payloads/resource-009/012.b64",
+          "sha256": "8d6bd1835de3ec19fac622383ad851b85ba5912edba0739adbf8a45de758700d"
         }
       ]
     }
