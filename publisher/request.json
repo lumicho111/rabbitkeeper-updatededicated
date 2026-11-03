@@ -2,68 +2,68 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-010",
-    "title": "资源更新 010 · 已确认源码构建",
-    "notes": "兔版 Float 资源更新 010（适用 APK 1.0.6 / build8）\n\n基于用户确认的 rabbit-float-build8-resource-009-source-replaced(1).zip 原样构建，保留其中 lib/browser-collection.ts 的完整内容。\n安装：设置 → 关于与更新 → 检查更新。无需重装 APK。\n已完成 TypeScript 检查、Android Web 生产构建、资源签名与 build8 基线兼容验证。未进行真实 Android 手机实机安装验证。\n",
+    "tag": "resource-011",
+    "title": "资源更新 011 · 恢复008右侧状态图标",
+    "notes": "兔版 Float 资源更新 011（适用 APK 1.0.6 / build8）\n\n仅将顶部状态栏右侧的电池、信号、Wi-Fi 图标组恢复为 resource-008 的实现，恢复固定电池图标，不再读取真实电量。\n时间、灵动岛、页面配色及其余功能保留 resource-010；lib/browser-collection.ts 内容保持不变。\n\n安装：设置 → 关于与更新 → 检查更新。无需重装 APK。\n此包用于验证右侧图标消失是否与电池组件改动有关，尚未确认根因。\n已完成 TypeScript 检查、Android Web 生产构建及签名/资源兼容验证。未进行真实 Android 手机实机安装验证。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build8-resource-010.zip",
-      "size": 3849084,
-      "sha256": "dd1069de8f2f7d58cc7fbe93a15d4b9f3f74925de6bd8e94157f746c1ff7a6df",
+      "name": "rabbit-float-build8-resource-011.zip",
+      "size": 3848662,
+      "sha256": "1c951c5cca681abc2534dd97093ba9b9dd82b385925777920b57f2e54e6a7b5a",
       "parts": [
         {
-          "path": "publisher/payloads/resource-010/000.b64",
-          "sha256": "f1bf82f294d5c1b8888373e0d4b16178c13032d2248336b0224bd26f104a9d7d"
+          "path": "publisher/payloads/resource-011/000.b64",
+          "sha256": "9e141dad13e20a32315aa63517d78dc9aff8e778fc303e56c56c481da83172a7"
         },
         {
-          "path": "publisher/payloads/resource-010/001.b64",
-          "sha256": "c7dee0af6fe8e5a85268b4393573e1dbbcbf8a04571441d4584167116766996d"
+          "path": "publisher/payloads/resource-011/001.b64",
+          "sha256": "d55864896155f7cdfabe229c4a7c3d2a0f9a486b73a419cfd6eb44e2f673ffbb"
         },
         {
-          "path": "publisher/payloads/resource-010/002.b64",
-          "sha256": "1c5cefb3ddd464ffa3976adb93689c71356a0e98bfd416cf4341f47bd4cdb2a9"
+          "path": "publisher/payloads/resource-011/002.b64",
+          "sha256": "0f38c6551b65e806eedcda70758e77fe4ffb71ce3be2ca1a3f580634b4745ddf"
         },
         {
-          "path": "publisher/payloads/resource-010/003.b64",
-          "sha256": "05689a351a069870c618946304d39dc5121227d6fc555758e7f790341deb2d31"
+          "path": "publisher/payloads/resource-011/003.b64",
+          "sha256": "13fc36127f0f8a60064e39c17d50c32c9af7d07a73b2b15207d9f10ad98d2111"
         },
         {
-          "path": "publisher/payloads/resource-010/004.b64",
-          "sha256": "c6f4c7ed8837abbb27a47cfdd5b601a810a0dc2c81e8e3fe39222f0ad4da250e"
+          "path": "publisher/payloads/resource-011/004.b64",
+          "sha256": "6c77572defa09672691dc758dbaa9ecf08797dd9e4009492da631655f915027f"
         },
         {
-          "path": "publisher/payloads/resource-010/005.b64",
-          "sha256": "1ad2531f7582a769aecb04adf1a4c6c628441f3ea63c624b2a9d6a1d2a9f406d"
+          "path": "publisher/payloads/resource-011/005.b64",
+          "sha256": "36324c48af2617d8923ee80ff67a8c2a1c3bad861287898a547b33928fdbbbc0"
         },
         {
-          "path": "publisher/payloads/resource-010/006.b64",
-          "sha256": "e13ea1e20dd0650c5b946cafc5048651f5ef2b92ddec7cb32d15b7868756d6ed"
+          "path": "publisher/payloads/resource-011/006.b64",
+          "sha256": "00d32901e7441ad669e210f972044ea6aa89ac885bc04508fa85548bfb06554c"
         },
         {
-          "path": "publisher/payloads/resource-010/007.b64",
-          "sha256": "7d6289df57db6bb3af9b2df14bfd994f01f6eb8ed49a57dc2995334926b284ca"
+          "path": "publisher/payloads/resource-011/007.b64",
+          "sha256": "e7212c37c16e8a813cbf6c29d1d1405dd7f4ae103d6ecf01612f4e120815d597"
         },
         {
-          "path": "publisher/payloads/resource-010/008.b64",
-          "sha256": "e142407af941aa5d9b86f528201895416a16379192ef381397d135e5ce76a955"
+          "path": "publisher/payloads/resource-011/008.b64",
+          "sha256": "4cb731f95d88731b5e5a7ae5c62f829d968d95a73b909bebcd3cd0955f3fb363"
         },
         {
-          "path": "publisher/payloads/resource-010/009.b64",
-          "sha256": "5c07f9ee5de0826c788e845737a9d22f8cf0740562b3465730a97d8e5def30dc"
+          "path": "publisher/payloads/resource-011/009.b64",
+          "sha256": "d8d572fa0b8bf1b666760d44ba2e9b1ff7e120669e12ee9580480dcd2611b6ec"
         },
         {
-          "path": "publisher/payloads/resource-010/010.b64",
-          "sha256": "66a72a9f7adc527bea0e8271d4e0b35ad506540082daafa6e63c1f3544baf582"
+          "path": "publisher/payloads/resource-011/010.b64",
+          "sha256": "8e17026b0c181fde5b2e6deeafa8bba4a8a2d2f5b469feebe958aa3683205f3b"
         },
         {
-          "path": "publisher/payloads/resource-010/011.b64",
-          "sha256": "4957180f1bb0b57ab5820942476d7185cdf05be97d9d2f766de7783e70680d27"
+          "path": "publisher/payloads/resource-011/011.b64",
+          "sha256": "8a75ee41a97c675605abc2568b11e0c3d2a28dc499ef4dc9cba5143e5a8ea6f4"
         },
         {
-          "path": "publisher/payloads/resource-010/012.b64",
-          "sha256": "9b54744ff05ea4ebdb3640e487c01ed581b0d9f0ea1569b741205aca56c802dd"
+          "path": "publisher/payloads/resource-011/012.b64",
+          "sha256": "ff73c7a8d75927a7b43bb168371ba25e6fe47983588bac0726f81f1129273089"
         }
       ]
     }
