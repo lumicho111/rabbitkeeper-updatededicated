@@ -2,76 +2,56 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-003",
-    "title": "资源 003 · 幕后导演讨论室",
-    "notes": "# 资源 003 · 幕后导演讨论室\n\n适用于兔版float 1.0.4（APK build 6）。这是累计资源更新，可以从内置资源或资源 002 直接安装，不需要重装 APK。更新前建议导出完整数据备份。\n\n- 幕后改为简洁的手机 GPT 风格：顶栏保留对话名，左侧抽屉，右侧新聊天与菜单，移除分享和模型小三角。\n- 侧栏分置顶、聊天；支持按标题搜索。长按对话可重命名、置顶、归档、删除。新聊天和退出放到底部，保留深色模式、归档查看和导出。\n- 当前对话菜单支持置顶、聊天内查找、归档和删除；归档或删除后返回可用对话，不留下空白页。\n- 输入框加号统一为照片、文件、角色、模型四个入口。\n- API 与模型在同一个抽屉里选择，沿用全局保存的连接信息，按对话记住选择。模型列表可搜索，也可手动填写。\n- 角色资料支持层级多选、统一读取；预览改为可展开的词条，能编辑副本、移除、手动补充资料，再点“发给幕后”直接发送，支持附带问题。不修改原始资料，也不自动持续同步。\n- 新增导演伙伴 AI 与角色访谈。默认第三方分析，也可以把演员叫来解释；区分已有依据和可能的解释。两种模式都不推进正式剧情、不回传记忆、不修改人设。\n- Word（.docx）和 PDF 在本机提取文字后供模型阅读，图片仍走模型看图。保留文本文件支持。\n- 旧幕后对话、附件、归档、深色设置与已有 API 选择保留。\n\n空白页文案：\n导演，今天想问什么？\n可以和导演伙伴 AI 聊聊，也可以把演员叫过来。\n幕后的故事，不会带回幕前。\n\n文件范围：单个附件最多 5MB、每轮最多 9 项；单项文字最多 60000 字符，PDF 最多 200 页。暂不支持扫描 PDF 的 OCR 和旧版 .doc，请改发图片或转换为 .docx/可选中文字的 PDF。模型列表接口不可用时仍可手动输入模型名。\n\n验证：类型检查、网页生产构建、原有线下重回/转发回归及新的幕后迁移/API/访谈/资料边界检查通过。用模拟 API 的手机尺寸浏览器预览检查了长按、标题搜索、聊天内查找、资料多选/编辑/发送、访谈和归档返回；真实 DOCX（含表格）和 PDF 的本地文本提取通过。没有在真实安卓设备上验证本次更新后的全部交互或真实模型输出。\n",
+    "tag": "resource-004",
+    "title": "资源004 · 查手机密码与互动聊天",
+    "notes": "资源004 · 查手机密码与互动聊天\n适用于 APK 1.0.5（build7），无需重装 APK。更新前请导出完整数据备份。\n\n新增默认1234密码、按人设批量生成密码、猜密码与强行破译、十分钟冷却。\n新增Chat账号代发、召唤收件人回复、退出前编辑删除；退出后同步双方记录并处理解释、转发与可能改密。\n知情进入抽样记录查看应用；静默纯查看不暴露。记录入口可撤销本次捣乱聊天或整次查手机。\n反查手机暂不包含。撤销只清理由本次自动关联的记录，后续手工另写或独立导出的副本不自动删除。\n\n状态回归、类型与生产构建、模拟API界面交互已检查；未在真实安卓设备或真实模型API上验证。",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build6-resource-003.zip",
-      "size": 5727161,
-      "sha256": "97a351022325a750f6120a8a180c92ac2d386cbe61b66b42fcd6df5e4bd1347c",
+      "name": "rabbit-float-build7-resource-004.zip",
+      "size": 2968563,
+      "sha256": "e3969e60f8beef9e6491c47b638a7dd6d3ce567214743fb69368092b614173e6",
       "parts": [
         {
-          "path": "publisher/payloads/resource-003/000.b64",
-          "sha256": "b6f19552481a89522102f9b71c63ef897f2225c3f73fd5cc816ea734604c2a14"
+          "path": "publisher/payloads/resource-004/000.b64",
+          "sha256": "a2b6d745c56ab7b40937f7cc55b7b917f115aff739ba293e75c1af4434881edb"
         },
         {
-          "path": "publisher/payloads/resource-003/001.b64",
-          "sha256": "58160eb1dc93aced7d934a27620dc42325c48d361fddd0e29f158e3037fd2c67"
+          "path": "publisher/payloads/resource-004/001.b64",
+          "sha256": "dd1ab35a1ef134a9d9839fcee5f390003b767e762fdd28cf0bc3c1497a4b4f38"
         },
         {
-          "path": "publisher/payloads/resource-003/002.b64",
-          "sha256": "da065884eeae2a278455668521fda40e3486777a5daadb103c6c0974c5506419"
+          "path": "publisher/payloads/resource-004/002.b64",
+          "sha256": "0f41f084aa05e8200693e01852f4e5bd72f018efa764b6f00333331270d03d76"
         },
         {
-          "path": "publisher/payloads/resource-003/003.b64",
-          "sha256": "6bab26508e5b8b9c076d19b56518fea29e49d6b644a60db0eac62000069d87c6"
+          "path": "publisher/payloads/resource-004/003.b64",
+          "sha256": "17f476e0bf6ef15dad6066f86dafbc7bc9365807c322dc9ccc7046b2d5e784ed"
         },
         {
-          "path": "publisher/payloads/resource-003/004.b64",
-          "sha256": "40aac672f6a06ef94c7ab5274c78055f939c77ddc3743be825960b8860aef92f"
+          "path": "publisher/payloads/resource-004/004.b64",
+          "sha256": "195bf10c9d440b679bb4ec7685377de41f669c9d1bf105293f7289e660ca05f9"
         },
         {
-          "path": "publisher/payloads/resource-003/005.b64",
-          "sha256": "d6a7ada322d2eccfebbeab59553e9045f72a4d1f2e99c4a8e131230c3b063afa"
+          "path": "publisher/payloads/resource-004/005.b64",
+          "sha256": "5d8675f3ba42974658b50c0000dc4df7505e2eb59b2afc994d11a4fbb0b65058"
         },
         {
-          "path": "publisher/payloads/resource-003/006.b64",
-          "sha256": "67db35a352a00d1554814e6f0ee8fdb6b800f2e89571c6f394698357e1cbd14f"
+          "path": "publisher/payloads/resource-004/006.b64",
+          "sha256": "89ad9e829ef356c1eb357bde9cb6cb4b8b3b3f4b54dbea57855a8550d3285824"
         },
         {
-          "path": "publisher/payloads/resource-003/007.b64",
-          "sha256": "97b0c80b3bc2e5fa03f68f4e34003a02f8ab32f9b17a099ae4cefa2e056c96f6"
+          "path": "publisher/payloads/resource-004/007.b64",
+          "sha256": "42be77b71063628097e7909930e4eac113211ecf4e3e4fdc28b1d77b8fb4a417"
         },
         {
-          "path": "publisher/payloads/resource-003/008.b64",
-          "sha256": "4b5edecc935f6738caddf0885abeb9f6b28447de8f885c57950ae8a7a92914d1"
+          "path": "publisher/payloads/resource-004/008.b64",
+          "sha256": "f324541aad8501a028541f79386552fb2920868c3ae2abb5d093cb7a18394330"
         },
         {
-          "path": "publisher/payloads/resource-003/009.b64",
-          "sha256": "80d8ddb6932db0fe20b61759c329163c6296756f38658ce6699b97a49b0b5248"
-        },
-        {
-          "path": "publisher/payloads/resource-003/010.b64",
-          "sha256": "0cc8a84c2f0cc594f9241347d7eba2abecdeed5a14bc817849f647e9ca1170bf"
-        },
-        {
-          "path": "publisher/payloads/resource-003/011.b64",
-          "sha256": "eb7fb46aa96af07d277cc0d9f82c17c5cad64d6148789e4ed33503bf3835357a"
-        },
-        {
-          "path": "publisher/payloads/resource-003/012.b64",
-          "sha256": "6d28ee6898a269f2aa2aab147335c2d85cd3aee31a00d7a0de7e8019279ee1cc"
-        },
-        {
-          "path": "publisher/payloads/resource-003/013.b64",
-          "sha256": "15080307aa614db42de24670cc55f3597bc903840329cd80ea4f6d6f43ccdb68"
-        },
-        {
-          "path": "publisher/payloads/resource-003/014.b64",
-          "sha256": "03eb84bfd53803ddc455ecbb1aa99e425cc5fce0dbc2e9374d599d5735799ff4"
+          "path": "publisher/payloads/resource-004/009.b64",
+          "sha256": "33a08e419df24fe960387f76bab3aa7d4d15e1f8c61525ef0b89bcd9ad809985"
         }
       ]
     }
