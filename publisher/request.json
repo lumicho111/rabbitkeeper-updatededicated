@@ -2,68 +2,68 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-013",
-    "title": "资源更新013 · 相册、动态媒体与作息",
-    "notes": "兔版 Float 资源更新 013（适用 APK 1.0.6 / build8）\n\n1. 作息：保留入睡时间波动；持续来回聊天时顺延本次睡眠，不到最早时间就强制晚安，话题结束后自然休息。\n2. 相册：栏目为首页、人物、共享、专用池；首页保留两项设置和生图图库，标注生成图归属。角色相册右上角直接新建，相册内上传；移除未分类入口、推荐名称、套图示例、图片详情的整理按钮。修正开关圆点与弹层遮罩。\n3. 套图：长按拖动 A 到 B 成套，以 A 作封面；再拖 C 则以 C 为封面，右上角显示套图张数。\n4. Chat、X、朋友圈：GIF 和实况原地播放，发送成功首次自动播一次，不循环；GIF点图重播，实况点按小标记重播，8秒以内视频沿用抽帧读取。\n5. X 发帖新增 GIF、实况入口；评论原发图按钮弹出从相册发图、文字描述、实况照片。朋友圈可直接选择图片、GIF或8秒以内视频。\n6. 日程统一读取日历；移除 X、提问箱、Theqoo 的独立 WVS 日程选项。本人可参考私人安排决定是否公开；路人、官号、世界观只接收公开行程、公开节点及受限低频目击片段。直播观众评论单独生成，不读取主播私人日历。拍摄、录音等具体安排继续保密，作品播出与发行节点另算。\n7. YouTube／WVS 开播结合本人完整日历：可中断的私人活动允许自然开播，拍摄等无法兼顾的工作仍限制开播。观众只知道实际播出的内容。\n8. 幕后可整理回传指令，展示目标线上会话与全文；经导演确认后插入灰色 Chat 系统指令卡片，取消不写入；不自动修改人设或长期记忆。\n\n手记 iCity 方向暂缓。lib/browser-collection.ts 保持原样。保留 012 状态栏修复。\n已完成 TypeScript、生产构建、针对性逻辑与桌面/触屏浏览器交互测试，以及原 Java 更新器签名、还原和回退验证。未连接真实 Android 手机进行实机安装测试。\n安装：设置 → 关于与更新 → 检查更新。无需重装或清除数据。\n",
+    "tag": "resource-014",
+    "title": "资源更新014 · 手记新空间与实况修复",
+    "notes": "兔版 Float 资源更新 014（适用 APK 1.0.6 / build8）\n\n1. 手记改为纯文字日记空间：五栏为日记本、动态、写日记、消息、我的；动态含世界、朋友、喜欢。内部独立日间/夜间模式并保存选择，不跟随全局主题。\n2. 书架：user 和每位角色各有个人日记本；新增多人共同日记和1v1交换日记，邀请接受前不能读写，默认仅成员可见。个人日记逐篇可设世界、朋友、指定朋友、仅自己。\n3. user 可以写、编辑、删除文字日记。支持世界日记浏览、点赞评论、互动通知、好友申请和导演管理角色间好友关系。没有站内私聊，也没有图片/GIF/视频日记发布入口。\n4. 个人主页支持头像、背景、昵称、账号、简介和默认分享范围。马甲按账号身份展示；外界评论不注入作者私人日历、聊天或日记。已知朋友圈路人账号可沿用为独立日记账号，不自动成为好友。\n5. 保留原日记生成引擎、人设/记忆/世界书等参考逻辑及定时服务。共同/交换日记手动生成时额外提供本日记本成员可见的历史内容。原日记数据保留并按私密迁移，字体、翻译和原私密记录管理入口保留。\n6. 朋友圈：修复单独发布实况/GIF时媒体区域被遗漏而显示空白；发布前实况预览为1:1居中裁切，发布后按原始宽高比完整展示，不再限制360px高度。\n7. 动态照片试验导入：Chat和X的实况入口可选择原始 JPG 动态照片；朋友圈选图可识别 JPG 内嵌视频，提取后沿用8秒/抽帧/单次播放逻辑。只试验支持含完整内嵌MP4视频的JPG，不保证所有vivo或其他品牌私有封装兼容；静态照片不伪装为实况。\n8. 检查更新新增连接中提示和25秒等待超时反馈，避免无反馈等待；未连接用户手机，尚未确认此前拉取无响应的根本原因。\n\nlib/browser-collection.ts、原日记生成引擎和定时服务保持字节一致。保留013及此前状态栏修复。\n验证：TypeScript、手机生产构建；日记权限/邀请/迁移/撤销/删除、动态照片提取边界；浏览器发布、评论点赞、主题保存、共同日记、主页及朋友圈实况渲染和比例验证；原Java更新器校验和激活/回退测试。\n未进行真实Android安装或真实LLM API端到端生成测试；vivo原生动态照片待完整原文件实测。\n安装：设置 → 关于与更新 → 导入更新包，选择本ZIP，校验后安装并打开。无需重装或清除数据。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build8-resource-013.zip",
-      "size": 3861262,
-      "sha256": "2c016d2b510d32269a53165f8c7c62f4fbc1eac9a9df935c20e721ec0e68a17c",
+      "name": "rabbit-float-build8-resource-014.zip",
+      "size": 7707680,
+      "sha256": "cde40ae7934d15258a98c086eae6ad81d50385ad44ba30750ff167fc1ad76ab4",
       "parts": [
         {
-          "path": "publisher/payloads/resource-013/000.b64",
-          "sha256": "503a60a2dc307f26586ac57d1373b6abfed4eaa4af81fa5ef102587ea0a36668"
+          "path": "publisher/payloads/resource-014/000.b64",
+          "sha256": "f9e8e107ec231ccb42da88dad2bc7a6129e7a8ea51c6b0a65d3b2f0657e51986"
         },
         {
-          "path": "publisher/payloads/resource-013/001.b64",
-          "sha256": "28789e334d2d4b3d108aa688611c98a5d21ac056b2f462349ca7384e656e9968"
+          "path": "publisher/payloads/resource-014/001.b64",
+          "sha256": "f15b4bb286a707c166cac20feb958f5e87e43f0dd78fa0fb6c8e019e3533a912"
         },
         {
-          "path": "publisher/payloads/resource-013/002.b64",
-          "sha256": "3ea88cb31dc5e00f48ec8d82d9a5e325f742c6221b7a346c709432d3bf61cee8"
+          "path": "publisher/payloads/resource-014/002.b64",
+          "sha256": "f124adef8055b1ce3e01b42d85246bd6d9423564a7217955845f5aa1bd13b0f2"
         },
         {
-          "path": "publisher/payloads/resource-013/003.b64",
-          "sha256": "0bb8817c506693343e217d2e201cb290b5ed5854b73bdc49265b5d3077c139c9"
+          "path": "publisher/payloads/resource-014/003.b64",
+          "sha256": "c695ec1df24a1e34c62fe989747bd6ce595c7b991ad4b35e2660c0066efbbe55"
         },
         {
-          "path": "publisher/payloads/resource-013/004.b64",
-          "sha256": "626e9fb89695681e59083ad47b8b97d94739c264f6d54712ca10c7cba5500106"
+          "path": "publisher/payloads/resource-014/004.b64",
+          "sha256": "e640fc959136b9bff18b1efe49696c9a97bc148a7cfa66cf88cfb4865265ff2a"
         },
         {
-          "path": "publisher/payloads/resource-013/005.b64",
-          "sha256": "f7009638bbd3f343accf06f9b3b3ccaa597dc415c17eb61d8ac7aa44961bdfa9"
+          "path": "publisher/payloads/resource-014/005.b64",
+          "sha256": "245cb080e48d1b8258acf13a11bebf4b94fa1e260ea1aa9dd04249b6c62bc231"
         },
         {
-          "path": "publisher/payloads/resource-013/006.b64",
-          "sha256": "8e4ff746b0da94c7d1a8aa07617b1dd6f56e49cda016f086a079aee671795c54"
+          "path": "publisher/payloads/resource-014/006.b64",
+          "sha256": "09bf2233238ff47aedfab60649f01f7495759ad49dc6b3775ad3a258ed6a6ce1"
         },
         {
-          "path": "publisher/payloads/resource-013/007.b64",
-          "sha256": "d1cf7520b0c080b0d4537791386a33e3fbd062b4dae2db73193142b08fb59f63"
+          "path": "publisher/payloads/resource-014/007.b64",
+          "sha256": "0422b3f9e91e76ffd0ea398b8800762fd3a1c3337fac37ef5fa7e900722e92ef"
         },
         {
-          "path": "publisher/payloads/resource-013/008.b64",
-          "sha256": "b9aab2ed79181dbc8376b6a8a3d5eda6f0f0702378122b3ffa9b797d65ea7fe6"
+          "path": "publisher/payloads/resource-014/008.b64",
+          "sha256": "44099f5f2ebfa1598c4386c44d6df5cd0d005b674020ae979ce9d196c0446df0"
         },
         {
-          "path": "publisher/payloads/resource-013/009.b64",
-          "sha256": "3ac4f859ce84db533a1866e95254767b978dbb7cab993c24a69fe40bc69183e6"
+          "path": "publisher/payloads/resource-014/009.b64",
+          "sha256": "5fe19883ec8397c89006bd5c7d708f46aa2a792e8b4e631803dc600dbcae49fa"
         },
         {
-          "path": "publisher/payloads/resource-013/010.b64",
-          "sha256": "4ec977d1c3835d44fa24bab1041b498943cea634fcc7a1895af12e9dbbdefb86"
+          "path": "publisher/payloads/resource-014/010.b64",
+          "sha256": "9741171a63b923f06ab93fdc951cd5227ce5409ce7cda9024d05596b5acb44b2"
         },
         {
-          "path": "publisher/payloads/resource-013/011.b64",
-          "sha256": "d94fb7b45135d83023603627844268a876c257b0e2e3769208391e037e25b613"
+          "path": "publisher/payloads/resource-014/011.b64",
+          "sha256": "c6eeec02220b7c0c8e1bae22da6ad7f3e981d18fd2c43038fd10a6665be79e59"
         },
         {
-          "path": "publisher/payloads/resource-013/012.b64",
-          "sha256": "e060c8caef5fe867d3a95faaeb65436ac93f171757d4bb5b33da9fb720321f47"
+          "path": "publisher/payloads/resource-014/012.b64",
+          "sha256": "06c9bf1fa331cef85dbd499ba383ae8d27afb63fe6d4c38dbc3db69df4d3f0fd"
         }
       ]
     }
