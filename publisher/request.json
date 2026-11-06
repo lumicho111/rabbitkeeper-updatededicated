@@ -2,44 +2,44 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-017",
-    "title": "资源更新017 · iCity日记与私密互动",
-    "notes": "兔版 Float 资源更新 017（适用 APK 1.0.7 / build9）\n\n• iCity UI 按本轮约定调整：原版截图提取的底栏图标、四列圆头像直接加入/移出、主页原位改头像背景、精简资料和设置、顶部安全区、独立生成/保存与可滚动方形文字配图。\n• 移除旧版日记入口、重复“写一篇”、评论区与回应、多人共同日记、邀请等待。原有日记数据保留。\n• 个人自动日记按角色独立配置，默认关闭；保留人设、上下文、核心及长短期记忆等生成参考。发布范围由角色结合心情自主决定。每篇标记世界/好友/私密。\n• 1v1交换日记直接加入，单独设置自动回信与延迟；合并等待中的追加内容，不重复排队。所有生成保留确认与打断；失败/打断不保存半篇、不重置个人原冷却。\n• 世界刷新追加保留旧内容，角色可自主喜欢本批陌生人日记；主页分公开日记/喜欢。点赞缓慢累积，世界随日记变旧衰减、好友随机、私密无点赞。不做评论或自动共享事件。\n• 私密显示灰色封面，连点尝试偷看。25%被发现时触发Chat按人设回应，成功不通知。自己的私密单击打开编辑。\n• 反查加入iCity实际页面：角色可阅读user日记，私密需弹窗允许或概率破解后才能获得正文；可按人设继续请求，也可能放弃。可看见尝试过程与展开动画。\n• 明确提到iCity标题、引用或喜欢记录时按权限查找对应日记，不新增向量API。\n\n检查通过：全项目TypeScript、手机生产构建、权限/排队/打断/偷看/反查授权状态测试、390×844 Chromium界面交互。未连接真实Android设备或真实LLM/生图API进行端到端测试；自动任务依赖应用运行。\n更新：设置 → 关于与更新 → 检查更新。无需重装或清除数据。\n",
+    "tag": "resource-018",
+    "title": "资源更新018 · iCity好友分享与反查范围",
+    "notes": "兔版 Float 资源更新 018（适用 APK 1.0.7 / build9）\n\n• iCity 好友改为手动管理：账号设置内竖排头像、姓名、加为好友／删除好友；互加后识别彼此账号身份，不再自动跟随角色连线。旧自动角色好友关系清除一次，user好友保留。\n• 有权限不代表必看。刷新世界时按概率少量浏览实际可见日记，优先新内容，旧内容降低权重；私密和交换日记不参与。浏览只作为最多6小时的临时上下文，不新增短期／长期记忆或共享事件，Chat中实际讨论按聊天记忆正常处理。\n• 详情新增分享到Chat：世界日记可分享；好友日记只可发给作者已互加好友的角色；私密即使成功偷看也不可分享。分享卡片保留本次分享的正文与配图，点击可查看。发送时再次检查权限。\n• 私密日记一次偷看成功后继续保持解锁；原有被发现概率及冷却保留。\n• 反查iCity限定你的个人日记，可看世界和好友，私密需同意或成功破解。只能知道你与谁建立了交换日记，不能读取正文、预览或配图；不提供其他角色日记或喜欢列表入口。\n• Chat反查设置新增“允许 TA 看哪里”：Chat（消息列表、聊天记录、朋友圈）、购物和外卖、阅读、iCity、浏览器，默认全开，按角色分别设置。关闭后同时限制主动反查与偷偷查看，入口概况、操作与实际数据读取均检查权限。\n• 移除点赞点击后的残留灰底，详情心形按点赞状态显示红色实心／空心；写日记按钮参考提供的P2，调整为更饱满的白色圆润形状与柔和阴影。新列表和设置沿用现有字体及控件。\n\n验证：全项目TypeScript检查、手机生产构建、好友/分享/随机浏览/上下文/反查权限隔离测试；390×844 Chromium界面交互检查。未连接真实Android设备或真实LLM/生图API做端到端验证。日记本“短期记忆有日记但找不到”问题本轮未改动，待另查。\n更新：设置 → 关于与更新 → 检查更新。无需重装或清除数据。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build9-resource-017.zip",
-      "size": 3874075,
-      "sha256": "c60c68fb03e1f60401ca3d07c2094695ad37e7543fe3ef7f1e84e2fe1abefba1",
+      "name": "rabbit-float-build9-resource-018.zip",
+      "size": 3878539,
+      "sha256": "16d337ce2ca2170bd69eb30c5442cef0af1da83797f73d276abcc80ae286bdfb",
       "parts": [
         {
-          "path": "publisher/payloads/resource-017/000.b64",
-          "sha256": "c71070bcd3a536e93a1294997d9ed6bfe5073e351443438bf48f5c492e905168"
+          "path": "publisher/payloads/resource-018/000.b64",
+          "sha256": "552442e839072aac172c417aeb73cf04b1a40c05ccf584ff53e7bf5cd8ce7489"
         },
         {
-          "path": "publisher/payloads/resource-017/001.b64",
-          "sha256": "1825405be42fb263bc936de6847c50934b8523a2f48a23a174200de3f26b709b"
+          "path": "publisher/payloads/resource-018/001.b64",
+          "sha256": "1b46701849bd2b9c1c33cb4ef3ad2be43e2c156cb35bc7c3643872e725c9e37e"
         },
         {
-          "path": "publisher/payloads/resource-017/002.b64",
-          "sha256": "1dbd32580de16b21ad47308a7f323691d942244157df552ae1b9e80d6367981a"
+          "path": "publisher/payloads/resource-018/002.b64",
+          "sha256": "55a5185a7a6e2e00f203254b8caf5782e9e28f56fa9d0de1fabfd13f633109df"
         },
         {
-          "path": "publisher/payloads/resource-017/003.b64",
-          "sha256": "a5c8616cc24aa4fa975191d77aaa6498404cdb1fa35d0a9b73cec37d1175f7b6"
+          "path": "publisher/payloads/resource-018/003.b64",
+          "sha256": "7fd35c03c5f11a9039c0ac5dab629d2a090f2aa2cd8b65599a4a3f5e8bb71d60"
         },
         {
-          "path": "publisher/payloads/resource-017/004.b64",
-          "sha256": "f41e91791e29083851e93da65b3a7fdcf7b9c708bf083939e30f866bb3cfc0fd"
+          "path": "publisher/payloads/resource-018/004.b64",
+          "sha256": "05789965ad00428fd8696e5aa580f88b4afce611355aa95bd0a3e53196293889"
         },
         {
-          "path": "publisher/payloads/resource-017/005.b64",
-          "sha256": "c3a4a644b22547081a4ace935d225c0c48df1a648105c7daff6fe6ae9e8c1352"
+          "path": "publisher/payloads/resource-018/005.b64",
+          "sha256": "9c6e54e1b3a0bad85f38df08af378f4edd43d2d22881bf9c2a48e98732d1d7cf"
         },
         {
-          "path": "publisher/payloads/resource-017/006.b64",
-          "sha256": "ca91ae7236ab9607efff4bf9dbf82ee8e89ca091849f6a93342342bb4751f6f4"
+          "path": "publisher/payloads/resource-018/006.b64",
+          "sha256": "e294f47ada09be94c04f34538be742cfc35a7109a8d4f7ff01258ea010cd9abc"
         }
       ]
     }
