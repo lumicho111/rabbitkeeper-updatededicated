@@ -2,44 +2,44 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-025",
-    "title": "资源更新025 · 启动修复、图标与头像",
-    "notes": "兔版 Float 资源更新025（APK 1.0.7 / build9）\n\n• 按用户提供的 browser-collection(3)(1).ts 直接替换 lib/browser-collection.ts，不作内容检查或新旧对比，不擅自改写；仅进行编译验证。\n• 修复NovelNow进入App就自动弹出新建/编辑小说窗口：取消启动时自动恢复编辑弹窗。未完成的输入草稿继续保留，在书架点击“继续未完成草稿”才打开；已保存小说、章节、封面和标签不变。\n• 新建默认桌面改为按实际图标与组件占位依次填入前面的页面，前页有空位就不提前放后页；组件占位不能覆盖，图标不越界。默认组件仍保留，避免旧布局中第二页图标超过六行而不可见的问题。\n• 缺失内置图标补位同样从已有前页空格查找，保留用户已有图标位置、文件夹与Dock成员；不自动重排已经保存的自定义桌面。\n• 作者头像改为直接点击主页/设置中的圆形头像换图，移除单独上传按钮；AI读者、帖文作者和有头像位置的虚拟小说作者统一使用既有通用NPC头像。自己的头像继续使用本机上传图片。\n• 累计包含023、024的NovelNow功能和分类tag增删。本次先更新APK，源码仓库与Vercel网页版不更新。\n\n持续进行的本地查找测试（直到明确结束或调整）：\n1. X：近期相关公开背景的本地筛选，支持双语及少量跨语言词项；无额外AI检索调用，继续观察漏读与误命中。\n2. YouTube → Chat：按频道、日期、主题本地查找本人/合作/明确分享的视频，唯一明确才提供正文，多候选先确认，找不到以分享兜底；无额外AI检索调用。\n\n验证：TypeScript、Android Web资源生产构建；023—025回归。桌面测试覆盖默认无组件/默认组件、图标完整无重复、不覆盖组件、不越界、先填前页、已有位置和文件夹/Dock保留；390px浏览器验证留有未完成草稿时重进App不弹窗，手动继续能恢复原文。\n未在Android真机及用户真实API上端到端验证。\n\nAPK：设置 → 关于与更新 → 检查更新，安装资源025；也可导入同名签名ZIP，无需重装或清空数据。\n",
+    "tag": "resource-026",
+    "title": "资源更新026 · 提问箱头像关联与在场提示词",
+    "notes": "兔版 Float 资源更新026（APK 1.0.7 / build9）\n\n• 提问箱设置中的角色日历来源改为圆形头像点选：选中关联，再点取消；沿用原有角色关联状态，不清空已有设置。提问箱字体跟随全局。\n• 在场提示词弹窗上、下输入框统一为12px基础字号并跟随全局缩放，跟随全局字体；弹窗和输入框底色加深，减少底下内容透出，聚焦时同样保持清晰。\n• 在场的大标题、文章正文及其他页面保持原样；短信和电话的15处字号调整已撤回，Chat默认仍为联系人列表。\n• 累计包含025及此前资源更新。分享版不更新。\n\n验证：TypeScript类型检查、Android Web资源生产构建、原APK签名与资源文件完整性校验。未进行Android真机端到端验证。\n\nAPK：设置 → 关于与更新 → 检查更新，安装资源026；也可导入同名签名ZIP，无需重装或清空数据。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build9-resource-025.zip",
-      "size": 3986929,
-      "sha256": "501d1012bb75b2f9df2c5e7378beb6cd0cb9ad39dd6ccab5abe33be15f056321",
+      "name": "rabbit-float-build9-resource-026.zip",
+      "size": 3986152,
+      "sha256": "eb940b7c97c020c302a46633a0639c8a9d76cfc982b12f61319d525d203322f0",
       "parts": [
         {
-          "path": "publisher/payloads/resource-025/000.b64",
-          "sha256": "05d83092565b6ba36ec787472266379296778caf2ab3d579867eb9f47ec09fb5"
+          "path": "publisher/payloads/resource-026/000.b64",
+          "sha256": "401d30813f957251693abda64de4dcf8ff199dc49fd930e8e385b14fdba9ddee"
         },
         {
-          "path": "publisher/payloads/resource-025/001.b64",
-          "sha256": "e35841e6648cdfbfa2739ea397d14786b66dcf51032942662d74d0d86c938083"
+          "path": "publisher/payloads/resource-026/001.b64",
+          "sha256": "0445a2dc4afdcf492f7b3efaf6f3e77862fbb2fc96ea9c1992d121c4abc76dbe"
         },
         {
-          "path": "publisher/payloads/resource-025/002.b64",
-          "sha256": "7c4141c2b566b9e5781412de7f37298baedfac98c59f75594f94419040229398"
+          "path": "publisher/payloads/resource-026/002.b64",
+          "sha256": "55176012cd9f3c782f2adca2ffa7f2a7791f3c66b1bd341fdf14ea7f2d5c971c"
         },
         {
-          "path": "publisher/payloads/resource-025/003.b64",
-          "sha256": "b4396b96913384140f574bafd42d29e906774492f89858d520c566800162dda6"
+          "path": "publisher/payloads/resource-026/003.b64",
+          "sha256": "4c470207bc5123f10b54fdc7955a75b1ff3c5a72673e8dabea4ff1f7a41af4a3"
         },
         {
-          "path": "publisher/payloads/resource-025/004.b64",
-          "sha256": "35d3d76bb93dd61494b3cc1f335d863d92e4aad981eb0a2e1453b6190d3ed06b"
+          "path": "publisher/payloads/resource-026/004.b64",
+          "sha256": "5e500060690581fec2560f7ab20f0d4572f3822316e53d6416820490646c2d30"
         },
         {
-          "path": "publisher/payloads/resource-025/005.b64",
-          "sha256": "f550f4c67a0b830fbe0a13a6644527bbbd375adac566975e3f57bbd2f6cdde9d"
+          "path": "publisher/payloads/resource-026/005.b64",
+          "sha256": "86d3914e8ca09006814414552c4300c6da06948767d6c945c3f39532e605e398"
         },
         {
-          "path": "publisher/payloads/resource-025/006.b64",
-          "sha256": "d03a9516e1e9e5086b2d51c4ca5d6f913536ff462cb7b9272ce25e00e5fd4094"
+          "path": "publisher/payloads/resource-026/006.b64",
+          "sha256": "36b152cd7aab8268af7a2c8a4d979d592ee17827c65d87b476748df143f1024d"
         }
       ]
     }
