@@ -2,44 +2,116 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-027",
-    "title": "资源更新027 · 小红书原生消息通知",
-    "notes": "兔版资源更新027（APK 1.0.7 / build9）\n\n小红书移除重复的顶部铃铛，保留原生消息页、未读数量和设置中的新消息通知开关。\n原生点赞、收藏、评论、私信与新增关注接入灵动岛/横幅提醒；收藏与点赞区分文案，关注提示进入新增关注页，修复无显式线程ID的私信跳转。\n仅提示实际新增未读互动，关闭通知不影响站内未读；不新增现实手机系统推送。\n累计包含026及此前资源。IPA本次不更新。\n\n验证：类型检查、Android Web生产构建、通知采集/去重/开关/已读同步回归；未做Android真机端到端验证。\n安装：设置 → 关于与更新 → 检查更新，或导入签名ZIP，无需卸载。\n",
+    "tag": "resource-028",
+    "title": "资源更新028 · 内置美化音效与消息收岛",
+    "notes": "兔版资源更新028（APK 1.0.7 / build9；iOS 1.0.7 / build10）\n\n新消息先展示桌面横幅，再收进灵动岛。Chat、短信、LYSN 和已开启通知的社交应用只显示来源，不展示消息正文；来电与进行中的通话保持原有操作。\n语音收藏筛选字号与设置统一，选中为黑底白字，未选中为白底黑字。\n单独会话 CSS 方案新增 kakao 单聊/群聊日夜字幕翻译方案，手动选择才应用。Chat 扩展插件预置 ii KKT URL 版，默认关闭。\n内置 Chat 新消息/发送/来电/致电/挂断、短信新消息、Phone 来电、LYSN 新消息音效；自定义优先，支持恢复默认。Chat 保留原音效开关；Phone、短信、LYSN 新增独立声音开关，关闭声音不影响通知。\n移除旧查 user 手机工具入口与独立网易云工具入口；保留 Chat 新版反查和一起听使用的底层能力。其他工具与本地资料库不变。\n仅自用版更新，分享版不变。\n\n验证：TypeScript 类型检查、移动端生产构建、语音收藏回归、默认音效/覆盖/关闭/还原、方案隔离、插件默认关闭及卸载、旧查手机迁移、通知隐私与合并检查。真机验证仍需安装后检查。\n安装：安卓可在设置中检查资源更新，无需卸载；iOS 经现有 SideStore 发布流程生成新 IPA。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build9-resource-027.zip",
-      "size": 3986140,
-      "sha256": "27c8f0b960d90badff50db30169244f09920a2b4d956ecc041aacd50d3352d48",
+      "name": "rabbit-float-build9-resource-028.zip",
+      "size": 4322568,
+      "sha256": "719bf42dc908deecad7b9fdf65b6727f392d36efd5cf03968f7b4c47ff573c57",
       "parts": [
         {
-          "path": "publisher/payloads/resource-027/000.b64",
-          "sha256": "9ab5e53a5aa3001f34e4c0458fedaacc76ba78f119580b1ec4c124456de46ca4"
+          "path": "publisher/payloads/resource-028/000.b64",
+          "sha256": "68e8b346aac485d68f2744dd113cb075b84f0d4b8219506261068bc14af20cec"
         },
         {
-          "path": "publisher/payloads/resource-027/001.b64",
-          "sha256": "05eb596d0c97663f96be95be866f4f4c0fcfb56b59d4ee5e2d2cce434e19bc37"
+          "path": "publisher/payloads/resource-028/001.b64",
+          "sha256": "8397bfa006b1f7c14ec6a1ecdcd1264afc304b52160ffe9673c3d5492e39b220"
         },
         {
-          "path": "publisher/payloads/resource-027/002.b64",
-          "sha256": "a780b70a6d4056ad6b34850d808bce4f4e952548ea5ed7e3fa7475651fcde9d5"
+          "path": "publisher/payloads/resource-028/002.b64",
+          "sha256": "21a53ae37ad0eadd4d74b358228524e7b639988b586dc008953b3f26b30f7bd3"
         },
         {
-          "path": "publisher/payloads/resource-027/003.b64",
-          "sha256": "66167854556c6b3d456b87d1f90da5ec8550922b37243aef74571f5056d9d962"
+          "path": "publisher/payloads/resource-028/003.b64",
+          "sha256": "d2944178d7591c1872c163ede3ace1deafd2670664be34a5334e6ba1b7b1e8de"
         },
         {
-          "path": "publisher/payloads/resource-027/004.b64",
-          "sha256": "82eea620ff2540883c347b08cd31954fa598169379de37f10f4cf0c320ddfdcd"
+          "path": "publisher/payloads/resource-028/004.b64",
+          "sha256": "aabbd47cde74483bb54dcb2ac39bc1d0d194e01a6e4d5f1ac1e655c9be179427"
         },
         {
-          "path": "publisher/payloads/resource-027/005.b64",
-          "sha256": "a85dbffddbb801d76c16a283018e0e76ca3e96543f64ef3d5c93a474759fb41c"
+          "path": "publisher/payloads/resource-028/005.b64",
+          "sha256": "896adfa0a9a66a8cec20362fe608296553229f6669b6809c076371e7cfb11c24"
         },
         {
-          "path": "publisher/payloads/resource-027/006.b64",
-          "sha256": "10cbbf67489ffc8dadae18acd3c2a9f6a5e47653415c0b8020e53cbce6d7fe3b"
+          "path": "publisher/payloads/resource-028/006.b64",
+          "sha256": "8ba985091c8369a1007c35a9120c1cdf2d3daa8f68dfb4cfd0301bc6306bf76d"
+        },
+        {
+          "path": "publisher/payloads/resource-028/007.b64",
+          "sha256": "2e3e4139da43f5c39dcf55d07c84e9d64d46ee67f14630839b2537596c462c93"
+        },
+        {
+          "path": "publisher/payloads/resource-028/008.b64",
+          "sha256": "e90a8c57e2fb22b14401eb066ef11d2bd285fb7313b3569153f837fe215bfdc6"
+        },
+        {
+          "path": "publisher/payloads/resource-028/009.b64",
+          "sha256": "6d42b0b47458e2c2aac1d950c9bbcd1d8c7ccf918d0fce984d4c9ac3d81d0fae"
+        },
+        {
+          "path": "publisher/payloads/resource-028/010.b64",
+          "sha256": "e0387c2c063ff92fa7a89b43ecf0bee9723b6cf5490ebb408444eabc2787683e"
+        },
+        {
+          "path": "publisher/payloads/resource-028/011.b64",
+          "sha256": "dc9a34c59ccc6000d94bd34b0298cc326fc726a2fe6c789d0730723f70e9d81f"
+        },
+        {
+          "path": "publisher/payloads/resource-028/012.b64",
+          "sha256": "1b2ef59d356d2249a5ccc36c7d4cf385e7bbce2fe005f120f626003fc729ad2d"
+        },
+        {
+          "path": "publisher/payloads/resource-028/013.b64",
+          "sha256": "6726374c2e9ca0e3a8b9a308dcf7a73024e464049443219508ecb19e2c70b779"
+        },
+        {
+          "path": "publisher/payloads/resource-028/014.b64",
+          "sha256": "c22b643d4cc4100407240a9cf8073a739224129c34fd7e0771cfc0e2933e62d5"
+        },
+        {
+          "path": "publisher/payloads/resource-028/015.b64",
+          "sha256": "fd44a94135f88125adcbfcacc41397229dc2cdd248914acf6e140f004fa22ba4"
+        },
+        {
+          "path": "publisher/payloads/resource-028/016.b64",
+          "sha256": "df4f4241f46710e9abdf97f4107a2fb10dddf7b9526e6a00889d41dc8d41105f"
+        },
+        {
+          "path": "publisher/payloads/resource-028/017.b64",
+          "sha256": "790f313f9636ad96d35e943d0517177343d75ea38b6a0659562a625ba6193abd"
+        },
+        {
+          "path": "publisher/payloads/resource-028/018.b64",
+          "sha256": "79f17e575410139a1711e6c8a17a5275bebd9f7fc05d5d10e52f678a928c0cd3"
+        },
+        {
+          "path": "publisher/payloads/resource-028/019.b64",
+          "sha256": "19c3f9e72d6f9d073144a99ceeaf72097bc0db3b8d6bde572fd07aa55489d537"
+        },
+        {
+          "path": "publisher/payloads/resource-028/020.b64",
+          "sha256": "1bf327825421dea27f61c75d2b023e7488a83a90a7b7891a2269f6ee176da4c8"
+        },
+        {
+          "path": "publisher/payloads/resource-028/021.b64",
+          "sha256": "d709e013d5ddad3fd1a7fb97f8ff90cdbce366db4d4c68b3ac9345a6cf628ad3"
+        },
+        {
+          "path": "publisher/payloads/resource-028/022.b64",
+          "sha256": "cebe18992a4c2968bdfd2fbf564e9c2045bd1202a5a7213ffa1fd55b43bae4ea"
+        },
+        {
+          "path": "publisher/payloads/resource-028/023.b64",
+          "sha256": "c97178dab5d9a5ba060c88787ef781ca9009b32a433d1d658ce9f5435784bedf"
+        },
+        {
+          "path": "publisher/payloads/resource-028/024.b64",
+          "sha256": "791a025f086ddc67072717531f15fd48fe8331c2dc989532d0725b0990c24e99"
         }
       ]
     }
