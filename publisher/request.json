@@ -2,44 +2,44 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-026",
-    "title": "资源更新026 · 提问箱头像关联与在场提示词",
-    "notes": "兔版 Float 资源更新026（APK 1.0.7 / build9）\n\n• 提问箱设置中的角色日历来源改为圆形头像点选：选中关联，再点取消；沿用原有角色关联状态，不清空已有设置。提问箱字体跟随全局。\n• 在场提示词弹窗上、下输入框统一为12px基础字号并跟随全局缩放，跟随全局字体；弹窗和输入框底色加深，减少底下内容透出，聚焦时同样保持清晰。\n• 在场的大标题、文章正文及其他页面保持原样；短信和电话的15处字号调整已撤回，Chat默认仍为联系人列表。\n• 累计包含025及此前资源更新。分享版不更新。\n\n验证：TypeScript类型检查、Android Web资源生产构建、原APK签名与资源文件完整性校验。未进行Android真机端到端验证。\n\nAPK：设置 → 关于与更新 → 检查更新，安装资源026；也可导入同名签名ZIP，无需重装或清空数据。\n",
+    "tag": "resource-027",
+    "title": "资源更新027 · 小红书原生消息通知",
+    "notes": "兔版资源更新027（APK 1.0.7 / build9）\n\n小红书移除重复的顶部铃铛，保留原生消息页、未读数量和设置中的新消息通知开关。\n原生点赞、收藏、评论、私信与新增关注接入灵动岛/横幅提醒；收藏与点赞区分文案，关注提示进入新增关注页，修复无显式线程ID的私信跳转。\n仅提示实际新增未读互动，关闭通知不影响站内未读；不新增现实手机系统推送。\n累计包含026及此前资源。IPA本次不更新。\n\n验证：类型检查、Android Web生产构建、通知采集/去重/开关/已读同步回归；未做Android真机端到端验证。\n安装：设置 → 关于与更新 → 检查更新，或导入签名ZIP，无需卸载。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build9-resource-026.zip",
-      "size": 3986152,
-      "sha256": "eb940b7c97c020c302a46633a0639c8a9d76cfc982b12f61319d525d203322f0",
+      "name": "rabbit-float-build9-resource-027.zip",
+      "size": 3986140,
+      "sha256": "27c8f0b960d90badff50db30169244f09920a2b4d956ecc041aacd50d3352d48",
       "parts": [
         {
-          "path": "publisher/payloads/resource-026/000.b64",
-          "sha256": "401d30813f957251693abda64de4dcf8ff199dc49fd930e8e385b14fdba9ddee"
+          "path": "publisher/payloads/resource-027/000.b64",
+          "sha256": "9ab5e53a5aa3001f34e4c0458fedaacc76ba78f119580b1ec4c124456de46ca4"
         },
         {
-          "path": "publisher/payloads/resource-026/001.b64",
-          "sha256": "0445a2dc4afdcf492f7b3efaf6f3e77862fbb2fc96ea9c1992d121c4abc76dbe"
+          "path": "publisher/payloads/resource-027/001.b64",
+          "sha256": "05eb596d0c97663f96be95be866f4f4c0fcfb56b59d4ee5e2d2cce434e19bc37"
         },
         {
-          "path": "publisher/payloads/resource-026/002.b64",
-          "sha256": "55176012cd9f3c782f2adca2ffa7f2a7791f3c66b1bd341fdf14ea7f2d5c971c"
+          "path": "publisher/payloads/resource-027/002.b64",
+          "sha256": "a780b70a6d4056ad6b34850d808bce4f4e952548ea5ed7e3fa7475651fcde9d5"
         },
         {
-          "path": "publisher/payloads/resource-026/003.b64",
-          "sha256": "4c470207bc5123f10b54fdc7955a75b1ff3c5a72673e8dabea4ff1f7a41af4a3"
+          "path": "publisher/payloads/resource-027/003.b64",
+          "sha256": "66167854556c6b3d456b87d1f90da5ec8550922b37243aef74571f5056d9d962"
         },
         {
-          "path": "publisher/payloads/resource-026/004.b64",
-          "sha256": "5e500060690581fec2560f7ab20f0d4572f3822316e53d6416820490646c2d30"
+          "path": "publisher/payloads/resource-027/004.b64",
+          "sha256": "82eea620ff2540883c347b08cd31954fa598169379de37f10f4cf0c320ddfdcd"
         },
         {
-          "path": "publisher/payloads/resource-026/005.b64",
-          "sha256": "86d3914e8ca09006814414552c4300c6da06948767d6c945c3f39532e605e398"
+          "path": "publisher/payloads/resource-027/005.b64",
+          "sha256": "a85dbffddbb801d76c16a283018e0e76ca3e96543f64ef3d5c93a474759fb41c"
         },
         {
-          "path": "publisher/payloads/resource-026/006.b64",
-          "sha256": "36b152cd7aab8268af7a2c8a4d979d592ee17827c65d87b476748df143f1024d"
+          "path": "publisher/payloads/resource-027/006.b64",
+          "sha256": "10cbbf67489ffc8dadae18acd3c2a9f6a5e47653415c0b8020e53cbce6d7fe3b"
         }
       ]
     }
