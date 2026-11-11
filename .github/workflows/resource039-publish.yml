@@ -1,0 +1,92 @@
+name: Publish RabbitKeeper original-key signed Resource 039
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/resource039-publish.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rabbit-resource-039-publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SIGNATURE_B64: 'bLADqNzRJzzFfXpv+SqLIQLP6oBSKpbSksmEjDxi6HNkT1uHQR9K8VqM5Kca9h5cdJL2BwJ2IqD1QK9BLo+TJ3F3w+9+V8YhQfsdyhEJq5ItK/jBuWsH507MO2XlnmfJ5yUSOQFlr4pUWquGUvJ10EeMgxi3vfKgz8vnuZ5y+wGbqH111EkYSoeYiVTpdro2ZcWKraNe+zlr1Sl5qPT8NiryfzSsPdoB26XmYf/kMy4AzSsHcMVfT7F++eM00w1Eb2CqjOsRRROXkLCcujWU6Pnl73B2UEKZ41D5VYzXTpPKRn7r8joR1uolapnt5dusAKDJOLo45hjnenuchay1A39xTQcFPKXdqTYvnKTwwY0EAxQPM/m9kIjsHs03bRxFlGL9lNtRLrWcBjwx45RBtOe8U0wMZuOqhNS/i0uSZA6eOifN5fn9cWkWmVcWVYZ2CtgLS54yIvoADVEm7Kq8BpOJslWgxI2EjOIcr+62eDPyR00HN19j/2oegjp2v4BG'
+    steps:
+      - name: Checkout publisher
+        uses: actions/checkout@v4
+      - name: Checkout exact validated full source
+        uses: actions/checkout@v4
+        with:
+          repository: lumicho111/raccoonphonetest
+          ref: 2955a75cdd6f10e03033e5c82edc2a248327345e
+          path: app
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Compile source-based Android assets
+        working-directory: app
+        run: |
+          npm ci --no-audit --no-fund
+          npm run android:web
+      - name: Assemble manifest with VERIFIED private signature (no private keys on GitHub)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,hashlib,json,os,subprocess,zipfile
+          base=json.loads(Path('app/mobile/baselines/1.0.13-build15.json').read_text())
+          dist=Path('app/mobile-dist')
+          files={}
+          for f in sorted(dist.rglob('*')):
+              if f.is_file() and not any(x.startswith('.') for x in f.relative_to(dist).parts):
+                  files[f.relative_to(dist).as_posix()]=hashlib.sha256(f.read_bytes()).hexdigest()
+          for relative,digest in base['files'].items():
+              if relative in ('cordova.js','cordova_plugins.js') or relative.startswith('plugins/'):
+                  files.setdefault(relative,digest)
+          notes="资源039：Chat单人与群聊视频通话气泡及交互统一、仅点击播放才合成语音、临时通话视频；Phone电话界面改版、三按钮及通话语音交互；钱包返回手势；通话悬浮窗取消背景模糊。\n"
+          manifest={'schema':1,'appId':base['appId'],'nativeBuild':base['nativeBuild'],
+              'baseDigest':base['digest'],'resourceId':'rabbit-resource-039','sequence':39,
+              'label':'RabbitKeeper 039 通话界面更新','notes':notes,'files':files}
+          raw=json.dumps(manifest,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
+          digest=hashlib.sha256(raw).hexdigest()
+          print('039 manifest hash:',digest)
+          assert digest=='681311d674585005806d2346c965d670871ba004e5c8404ef5df689b15d012b4', 'Source bundle changed: abort signed publication'
+          sig=base64.b64decode(os.environ['SIGNATURE_B64'],validate=True)
+          Path('/tmp/m039.json').write_bytes(raw)
+          Path('/tmp/s039.sig').write_bytes(sig)
+          subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem',
+              '-signature','/tmp/s039.sig','/tmp/m039.json'],check=True)
+          out=Path('/tmp/rabbit-float-build15-resource-039.zip')
+          changed=[p for p,h in files.items() if base['files'].get(p)!=h]
+          with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+              z.writestr('manifest.json',raw)
+              z.writestr('manifest.sig',sig)
+              for p in changed:z.write(dist/p,'www/'+p)
+          with zipfile.ZipFile(out) as z:
+              assert z.testzip() is None
+              for p in changed:
+                  assert hashlib.sha256(z.read('www/'+p)).hexdigest()==files[p]
+          print('Public-key VERIFIED resource039:',out.stat().st_size,'bytes; changed assets:',len(changed))
+          PY
+      - name: Publish update to APK pull repository
+        shell: bash
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if gh release view resource-039 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo "039 already exists; refusing to replace a signed release"
+            exit 1
+          fi
+          gh release create resource-039 /tmp/rabbit-float-build15-resource-039.zip \
+            --repo "$GH_REPO" \
+            --title "资源更新039 · Chat视频、Phone电话及钱包返回" \
+            --notes "适用于 Android 1.0.13/build15。由完整源码编译，并以原签名验证。含Chat单人与群聊视频通话、Phone电话、钱包返回、通话悬浮窗修复。" \
+            --latest
