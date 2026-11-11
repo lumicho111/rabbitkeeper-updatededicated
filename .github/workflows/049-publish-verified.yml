@@ -1,0 +1,53 @@
+name: Publish verified cumulative resource049
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/049-publish-verified.yml']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TEMP_SIGNED_EXPORT: 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-9ab0-81fa-8946-273356a98158/raw?se=2026-11-11T12%3A48%3A15Z&sp=r&sv=2026-06-06&sr=b&scid=a22a5629-46a4-5616-8288-88acc4126958&skoid=27fbae2c-124f-4566-a0d8-1b07a5a41c53&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-11T02%3A17%3A53Z&ske=2026-11-12T02%3A17%3A53Z&sks=b&skv=2026-06-06&sig=rdfPHeqsgarkV2eLnzeFYQexPAExxsU4UOBMFI4uWew%3D'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download tested GitHub-compiled signed 049 artifact
+        run: |
+          curl -fsSL --max-time 120 --retry 3 "$TEMP_SIGNED_EXPORT" -o /tmp/049-artifact.zip
+          unzip -p /tmp/049-artifact.zip rabbit-float-build15-resource-049.zip > /tmp/rabbit-float-build15-resource-049.zip
+          echo 'a4b83df050bfce9b57427eb9c174e1cdfadf9b57e96ccb5d56c29b5d93b28b7c  /tmp/rabbit-float-build15-resource-049.zip' | sha256sum -c -
+      - name: Verify app, baseline, sequence and original RSA signature
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile,subprocess
+          path=Path('/tmp/rabbit-float-build15-resource-049.zip')
+          with zipfile.ZipFile(path) as z:
+              assert z.testzip() is None
+              raw=z.read('manifest.json');sig=z.read('manifest.sig')
+              assert hashlib.sha256(raw).hexdigest()=='6b65bd29befe32124f3b0180456c49b029d089e1d1400030e2258330be8be852'
+              obj=json.loads(raw)
+              assert obj['sequence']==49 and obj['resourceId']=='rabbit-resource-049'
+              assert obj['nativeBuild']==15 and obj['appId']=='app.ii.phone'
+              assert obj['baseDigest']=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              Path('/tmp/049-manifest').write_bytes(raw)
+              Path('/tmp/049-signature').write_bytes(sig)
+              subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature','/tmp/049-signature','/tmp/049-manifest'],check=True)
+              changed=[n for n in z.namelist() if n.startswith('www/')]
+              assert len(changed)>=3
+              for n in changed: assert hashlib.sha256(z.read(n)).hexdigest()==obj['files'][n[4:]],n
+          PY
+      - name: Publish immutable latest pull-update
+        run: |
+          if gh release view resource-049 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'resource-049 already published: refusing overwrite'; exit 1
+          fi
+          gh release create resource-049 /tmp/rabbit-float-build15-resource-049.zip \
+            --repo "$GH_REPO" \
+            --title '资源更新049 · 视频原声与通话修复' \
+            --notes 'Android 1.0.13 / Build15 正式累计资源更新。包含047以及已验收048的全部功能：Chat 单聊、群聊视频通话上传视频原声的独立音量控制（默认静音、主动启声），不影响角色语音 TTS；普通语音通话保持原设置。继续保留通话悬浮窗、直播退出/后台返回手势、窄台词菜单、夜间视频输入栏及上传视频按钮的修复。直接在现有 APK 内拉取最新049，不需要逐版安装测试包。' \
+            --latest
