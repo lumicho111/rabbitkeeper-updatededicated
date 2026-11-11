@@ -2,60 +2,48 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-035",
-    "title": "资源更新035 · Chat／Lysn 叠图洗牌与配图策略",
-    "notes": "# Rabbit Float 资源 035 · Android 1.0.13 / build15\n\n适用于已安装的 Rabbit Float 1.0.13 / build15。此更新为本地网页资源更新，不改变 Android 原生版本。\n\n- **Chat 与 Lysn 叠图**：使用同一套已确认的手势洗牌动画。主图静止正放，滑过临界位置时先改变前后层级；首图右叠、中图左右对称、尾图左叠；我方「展开全部」靠左、角色靠右。Chat 展开按钮浅灰色，Lysn 浅紫色。Lysn 同时支持折叠我方连续发送的照片。\n- **图片展示**：Chat 单图、实况及 Lysn 单图统一为小尺寸圆角；保持原比例等比缩放，不裁切。实况仍可播放。\n- **图片生成设置**：在「AI 行为 → 应用单独设置」新增各平台「优先文字图／自动生图」选项，默认 Chat/Lysn 优先文字图，朋友圈、X 和 Weverse 默认自动。保留点开文字图编辑描述、手动发起生图；生图服务开关与平台自动策略分开。\n- **泡泡体验**：优化 Lysn 提示词，降低逐条回答当前 User 的倾向，允许与众多匿名粉丝自然交流、引用模型模拟的粉丝留言；保留原有发送时机。缩小紫色已读勾和双方时间戳。\n- **相册保存**：照片详情新增保存到设备入口，调用现有设备图库／系统分享能力。\n- **细节修复**：电话和短信设置中部分方形选择框改为绿色开关，截图保存结果改为小型浮动提示，截图复制伪元素时保留空内容的气泡尾巴。\n- **已停用功能清理**：完整版的 Chat 单聊和群聊不再向模型注入全屏特效提示词；可见入口与播放功能保持停用。\n\n注：图标逐像素改色和统一事件流的完整跨平台补强未纳入本次已编译资源，仍保留为后续待修项。分享版的特效总开关另行更新，此资源不包含分享版。\n",
+    "tag": "resource-039",
+    "title": "资源更新039 · Chat视频、Phone电话及钱包返回",
+    "notes": "# RabbitKeeper 资源039 · Android 1.0.13 / build15\n\n由完整版源码直接编译，原签名密钥已在本地签署并通过公钥校验。不修改原生 APK 版本。\n\n- Chat 单人和群聊视频通话：玻璃语言气泡、动作居中、原文翻译折叠、长按编辑/重回/删除、语音按需播放、回车发送及↑召唤、三键操作栏。\n- 临时视频：本次通话上传并显示，首次上传确认免责声明，挂断后释放，不作为悬浮窗图片。\n- Phone 电话：拨号中挂断固定底部、台词与输入联动、免提/挂断/台词三键、按需语音和气泡操作。\n- Chat 更多→钱包：系统返回手势回到更多页。\n- Chat 视频悬浮窗：去掉毛玻璃模糊，保留边框与设定的通话形象图片。\n\n请在 Android 1.0.13/build15 上更新，建议先保存重要聊天数据。",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build15-resource-035.zip",
-      "size": 4036493,
-      "sha256": "c6f5818c142038f00c4703b21a175210962fb6841a97edb802e2f50618b6a4b1",
+      "name": "rabbit-float-build15-resource-039.zip",
+      "size": 4041912,
+      "sha256": "e7a10364d79142daedc16d93be127300280c8ae9bc47acf1070c41dae0e9febb",
       "parts": [
         {
-          "path": "publisher/payloads/resource-035/000.b64",
-          "sha256": "6db554c4d004fff32b2215090f025660c0b1ab1807071c6aa2bfc13b27f84249"
+          "path": "publisher/payloads/resource-039/000.b64",
+          "sha256": "8ede0d40aa6d8e283a97f1c536533f48338dc4b91bf72d28bff763fca7e73a1f"
         },
         {
-          "path": "publisher/payloads/resource-035/001.b64",
-          "sha256": "fef07039ce377cdc47926f60e44c1c7f0caac178eb2cdbc25df53f32fa38856f"
+          "path": "publisher/payloads/resource-039/001.b64",
+          "sha256": "e37fc98128e1cfd1c789a572e09dfc9fbcf2e31fbd8b94b066ad463ef7e77eda"
         },
         {
-          "path": "publisher/payloads/resource-035/002.b64",
-          "sha256": "d2e7970e02c4c94e54983eba182b49db37ef975ff453ed176c978ed3b43746bb"
+          "path": "publisher/payloads/resource-039/002.b64",
+          "sha256": "677bff1df91484b850a8dd11e95e09c01ebbe56836b5c27c45279114f60a1df5"
         },
         {
-          "path": "publisher/payloads/resource-035/003.b64",
-          "sha256": "efb78ad62e066bcb7c4dbb1f93fe54fe99be78c92c582640f00a3ac3e26cbc28"
+          "path": "publisher/payloads/resource-039/003.b64",
+          "sha256": "e9668e1ef8f903dcd2236486811ea53a69432052b1041d57f5684459d572f598"
         },
         {
-          "path": "publisher/payloads/resource-035/004.b64",
-          "sha256": "a3bd4de000f1458865d5a57eb798869d05df90ff50b65197bd42d22ac7676fe5"
+          "path": "publisher/payloads/resource-039/004.b64",
+          "sha256": "97bd80588c5fd6f26e5174db6a773892076232d8d56c56a22a5041e673fd6c10"
         },
         {
-          "path": "publisher/payloads/resource-035/005.b64",
-          "sha256": "de9ebb85aae3be7b870c492c267b6b4ca0003fc2afbe4c98d82f5a246c9fd8f0"
+          "path": "publisher/payloads/resource-039/005.b64",
+          "sha256": "f5b1956066abd2466076faff592aa70b77ed810b545971bd0365e245b8a9bc72"
         },
         {
-          "path": "publisher/payloads/resource-035/006.b64",
-          "sha256": "095748774dc4cc018cef18dadae49e7ca32a5e9aeadf3e91880a5f377218d6fd"
+          "path": "publisher/payloads/resource-039/006.b64",
+          "sha256": "c61e3e485a95be916cb54252b6378fae1f3452a8f3944d49786c6f7e1a47e4fe"
         },
         {
-          "path": "publisher/payloads/resource-035/007.b64",
-          "sha256": "dda70d50c301c3281a976d850f1d42f4a1b9cab15d78d79b025097b3a1f39f0a"
-        },
-        {
-          "path": "publisher/payloads/resource-035/008.b64",
-          "sha256": "c7c5fb284002f0bb5638d707d1795fbdf613a404d8397d0367edc51807f001d3"
-        },
-        {
-          "path": "publisher/payloads/resource-035/009.b64",
-          "sha256": "6c1337f32258da5dc9e52ce714090f0eecbbbe6a75d648993b9f691f69ffe586"
-        },
-        {
-          "path": "publisher/payloads/resource-035/010.b64",
-          "sha256": "390b9d7d7f02f345b1e06896ebcb98c62c737130bcba144386fe3d008e757e1f"
+          "path": "publisher/payloads/resource-039/007.b64",
+          "sha256": "53922892d3d833732cc179c80ca8150ce21e837b4a1f65213b59cc780ed546b0"
         }
       ]
     }
