@@ -2,48 +2,44 @@
   "schema": 1,
   "repository": "lumicho111/rabbitkeeper-updatededicated",
   "release": {
-    "tag": "resource-040",
-    "title": "资源更新040 · Chat视频与Phone菜单修复",
-    "notes": "# RabbitKeeper 资源040 · Android 1.0.13 / build15\n\n- 修复 Chat 视频拨号中挂断按钮偏左。\n- 单人和群视频通话菜单独立于滚动区域显示，不再被半透明层遮挡或裁切。\n- Phone/Chat 的长按菜单缩小，字体和分隔线更清晰。\n- 取消群语音及群视频挂断后自动触发的额外 AI 回复请求。\n- 保留已有 Chat 视频和 Phone 通话功能、用户视频临时素材及按需语音。\n\n这是适用原 build15 APK 的累计资源更新，不需要重新安装 APK。",
+    "tag": "resource-050",
+    "title": "资源更新050 · 跨 App 记忆与联系人",
+    "notes": "# RabbitKeeper 资源 050\n\n适用 Android 1.0.13 / Build 15，累计包含 049。\n\n- 接通短信、电话、泡泡等 App 的近期经历、长期与核心记忆。\n- 修正电话重复上下文、短信陌生号码隔离与关系摘要更新。\n- 补齐 WVS / YouTube 已结束直播、独白及参与者的记忆归类。\n- 修正日记删除、历史补写时间和部分来源撤销，保留后来独立对话。\n- 联系人角色卡加入统一 Chat 网名；名片显示网名与电话号码。\n- Chat 加号新增推荐好友名片，发送后快捷建立双方关系与介绍经历。\n- 长期向量触发方式、预算和核心记忆策略保持现状。\n\n本次不更新 IPA。手机端界面与真实模型表达仍需实际使用验收。\n",
     "draft": false
   },
   "assets": [
     {
-      "name": "rabbit-float-build15-resource-040.zip",
-      "size": 4042269,
-      "sha256": "5a589877f5252c8f97cc001490bcfd3cc57ecf9979f8f539eebcd56e1e8e8a39",
+      "name": "rabbit-float-build15-resource-050.zip",
+      "size": 4050758,
+      "sha256": "db35ffc03973af0885e86e805d7b35738b9986f55e5560decba03912bd809fe2",
       "parts": [
         {
-          "path": "publisher/payloads/resource-040/000.b64",
-          "sha256": "424bee09559d237154ed05f25418f557561d99f0a54f66b4ff72be6e624babe5"
+          "path": "publisher/payloads/resource-050/000.b64",
+          "sha256": "230fb2bea1ca09cfcf8a5686d4834f89c191640e6f411a7c00e283093fb89399"
         },
         {
-          "path": "publisher/payloads/resource-040/001.b64",
-          "sha256": "cf7caf0284c99c56e8e701a2a8bc4ca8e4582835092403487ebe30c65d2094c4"
+          "path": "publisher/payloads/resource-050/001.b64",
+          "sha256": "a1fae5e2e64811b8d20f6ca153fd36b237129147c12f28fcbb6e73370919f957"
         },
         {
-          "path": "publisher/payloads/resource-040/002.b64",
-          "sha256": "987f5d1450697705f66f8e051b3d6637b1cbf5870df21e8632cab160bfb5f6ee"
+          "path": "publisher/payloads/resource-050/002.b64",
+          "sha256": "02da8c4be00093df547115e439b4bd6a07e255855cf19e4eda38a63894d2b64d"
         },
         {
-          "path": "publisher/payloads/resource-040/003.b64",
-          "sha256": "437e0410647e45f6feef2e0ef712f51ebaa9e56e3dbf0a0947ea741c2750d744"
+          "path": "publisher/payloads/resource-050/003.b64",
+          "sha256": "ab4f70d91dd9ca6ccf765a74cd80b389d74f3e1c8f94edd43188444db35e73b5"
         },
         {
-          "path": "publisher/payloads/resource-040/004.b64",
-          "sha256": "8cb27e8d15f313bf568e1b9f6847c635d697ae7f1afbe3785a191246995b240d"
+          "path": "publisher/payloads/resource-050/004.b64",
+          "sha256": "d782d9dd494e9d4427b277125ae611283c73b44e736c17609e30ecc95fecc12e"
         },
         {
-          "path": "publisher/payloads/resource-040/005.b64",
-          "sha256": "989666ecfbb893e9eb93a80c5d80c6be02312520680d3ef0830b3b565d083cff"
+          "path": "publisher/payloads/resource-050/005.b64",
+          "sha256": "e7600dcff75e6fe5a9cb6bd7eacc8b5c659cafba167818a5b8a8f066d54634f3"
         },
         {
-          "path": "publisher/payloads/resource-040/006.b64",
-          "sha256": "2c022f424d244ae754b7719a2ba216fc7d1a7ab50c9ab74f06778577e65c9b9b"
-        },
-        {
-          "path": "publisher/payloads/resource-040/007.b64",
-          "sha256": "85df54a79a97fc9c1cb53c3a616731eff464526a77df64ff6e3637871a9fdc2a"
+          "path": "publisher/payloads/resource-050/006.b64",
+          "sha256": "acce4ecafb49ee01babd830305a593ee7a43e94778198f6a3a645b65cf89abd5"
         }
       ]
     }
