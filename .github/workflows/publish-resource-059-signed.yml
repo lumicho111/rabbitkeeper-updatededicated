@@ -1,0 +1,80 @@
+name: Publish signed cumulative resource059
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.incoming/resource-059/013.b64'
+      - '.github/workflows/publish-resource-059-signed.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rabbit-resource-059
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore exact original-signed Build15 resource059 archive
+        run: |
+          set -euo pipefail
+          test "$(find .incoming/resource-059 -type f -name '*.b64' | wc -l)" -eq 14
+          cat .incoming/resource-059/*.b64 | base64 --decode > /tmp/rabbit-float-build15-resource-059.zip
+          echo '5d117ae439654b2bb0f05f6882661b2a44a61c7c889fec1f0aa317d4252bf2d7  /tmp/rabbit-float-build15-resource-059.zip' | sha256sum --check
+      - name: Verify RSA signature, manifest, base lineage and every changed asset
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,subprocess,tempfile,zipfile
+          from pathlib import Path
+          path=Path('/tmp/rabbit-float-build15-resource-059.zip')
+          assert path.stat().st_size == 4057608
+          with zipfile.ZipFile(path) as z:
+              assert z.testzip() is None
+              names=z.namelist()
+              assert len(names)==len(set(names))==9
+              raw=z.read('manifest.json')
+              sig=z.read('manifest.sig')
+              assert len(sig)==384
+              assert hashlib.sha256(raw).hexdigest()=='d3e4d634a8eb53706870966c4fa30f2ea250b6db44c8e348198b37f76684a540'
+              manifest=json.loads(raw)
+              assert manifest['schema']==1
+              assert manifest['appId']=='app.ii.phone'
+              assert manifest['nativeBuild']==15
+              assert manifest['sequence']==59
+              assert manifest['resourceId']=='rabbit-resource-059'
+              assert manifest['baseDigest']=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              assert len(manifest['files'])==322
+              assert len([p for p in names if p.startswith('www/')])==7
+              for name in names:
+                  assert name in ('manifest.json','manifest.sig') or name.startswith('www/')
+                  assert '\\' not in name and ':' not in name and not name.startswith('/')
+                  assert all(s not in ('','.','..') for s in name.split('/'))
+                  if name.startswith('www/'):
+                      key=name[4:]
+                      assert hashlib.sha256(z.read(name)).hexdigest()==manifest['files'][key]
+              with tempfile.TemporaryDirectory() as folder:
+                  f=Path(folder)
+                  (f/'manifest.json').write_bytes(raw)
+                  (f/'manifest.sig').write_bytes(sig)
+                  subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature',str(f/'manifest.sig'),str(f/'manifest.json')],check=True)
+              Path('/tmp/rabbit-resource-059-notes.md').write_text('# Rabbit Float 资源059\n\n'+manifest['notes'],encoding='utf-8')
+          print('Resource059 signature and cumulative manifest verified.')
+          PY
+      - name: Publish in-app pull update release
+        run: |
+          set -euo pipefail
+          if gh release view resource-059 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'Existing resource059 release found; refusing to overwrite.'
+            exit 0
+          fi
+          gh release create resource-059 /tmp/rabbit-float-build15-resource-059.zip \
+            --repo "$GH_REPO" \
+            --title '资源更新059 · 三种反查记录灰卡和短期记忆删除联动' \
+            --notes-file /tmp/rabbit-resource-059-notes.md \
+            --latest
