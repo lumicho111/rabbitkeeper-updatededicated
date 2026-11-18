@@ -1,0 +1,77 @@
+name: Publish resource 051 original signed update
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.incoming/rabbit-float-build15-resource-051.zip'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resource-051-verified-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify original signature, APK baseline and every payload
+        run: |
+          echo '859825fed495502d7fdbc42e8bd051fe6affe4ad0e1d5732f0e31e2b97b20bd4  .incoming/rabbit-float-build15-resource-051.zip' | sha256sum --check
+          python3 - <<'PY'
+          import zipfile, json, hashlib, pathlib, tempfile, subprocess
+          pkg=pathlib.Path('.incoming/rabbit-float-build15-resource-051.zip')
+          with zipfile.ZipFile(pkg) as z:
+              assert z.testzip() is None, 'Corrupt signed update ZIP'
+              names=z.namelist()
+              assert len(names)==len(set(names)) and len(names)<=5002, 'Bad ZIP entry count'
+              assert 'manifest.json' in names and 'manifest.sig' in names
+              raw=z.read('manifest.json'); sig=z.read('manifest.sig')
+              assert hashlib.sha256(raw).hexdigest()=='5a6a93b9ba5d706bbc318d185940366c3dc614f8508c67c145197524699837d2', 'Unexpected manifest digest'
+              manifest=json.loads(raw)
+              assert manifest.get('schema')==1 and manifest.get('appId')=='app.ii.phone'
+              assert manifest.get('nativeBuild')==15 and manifest.get('sequence')==51 and manifest.get('resourceId')=='rabbit-resource-051'
+              assert manifest.get('baseDigest')=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              files=manifest.get('files',{})
+              assert isinstance(files,dict) and len(files)==438 and 'index.html' in files
+              assert len(names)==125, 'Unexpected entry count'
+              with tempfile.TemporaryDirectory() as d:
+                  message=pathlib.Path(d,'manifest.json'); message.write_bytes(raw)
+                  signature=pathlib.Path(d,'manifest.sig'); signature.write_bytes(sig)
+                  subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature',str(signature),str(message)],check=True)
+              for name in names:
+                  assert not name.startswith('/') and '\\' not in name and ':' not in name and all(p not in ('','.','..') for p in name.split('/')), 'Unsafe archive path'
+                  if name in ('manifest.json','manifest.sig'):continue
+                  assert name.startswith('www/') and name[4:] in files, 'Undeclared asset'
+                  assert z.getinfo(name).file_size<=128*1024*1024
+                  assert hashlib.sha256(z.read(name)).hexdigest()==files[name[4:]],'Asset SHA-256 mismatch: '+name
+          print('Resource051 original signature and 123 changed assets verified')
+          PY
+      - name: Publish checked signed ZIP to the existing APK update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view resource-051 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'resource-051 already exists; refusing to overwrite or republish'
+            exit 1
+          fi
+          gh release create resource-051 .incoming/rabbit-float-build15-resource-051.zip \
+            --repo "$GH_REPO" \
+            --title "资源更新051 · 小谈塔罗与四柱" \
+            --notes "Android 1.0.13 / Build 15 正式累计资源 051。新增小谈咨询馆（塔罗牌、四柱、语音与场景素材）、AI 咨询对话、记录、Chat 分享与跨应用记忆衔接；累计包含 050 全部更新。保留原 APK 包名、原签名和已有用户数据，不需卸载重装。进入 设置 → 关于与更新 → 检查更新 获取最新 051。" \
+            --latest
+      - name: Remove temporary signed ZIP from repository after release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f -- .incoming/rabbit-float-build15-resource-051.zip
+          git commit -m "chore: clear published 051 staging ZIP [skip ci]"
+          git push origin HEAD:main
