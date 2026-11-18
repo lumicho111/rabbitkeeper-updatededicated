@@ -1,0 +1,78 @@
+name: Publish signed cumulative resource057
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'publisher/payloads/resource-057/033.b64'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: rabbit-resource-057
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble original-signed Build15 resource 057
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find publisher/payloads/resource-057 -type f -name '*.b64' | wc -l)" -eq 34
+          cat publisher/payloads/resource-057/*.b64 | base64 --decode > /tmp/rabbit-float-build15-resource-057.zip
+          echo '408645715ecbaf2966eabf2e31a5e6115d107b4bc1743a4b033298a8f09ce549  /tmp/rabbit-float-build15-resource-057.zip' | sha256sum --check
+      - name: Verify original RSA signature, cumulative manifest and files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,zipfile,subprocess,tempfile,pathlib
+          p=pathlib.Path('/tmp/rabbit-float-build15-resource-057.zip')
+          assert p.stat().st_size==4057418 and p.stat().st_size < 25*1024*1024
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              names=z.namelist()
+              assert len(names)==9 and len(names)==len(set(names))
+              raw=z.read('manifest.json')
+              sig=z.read('manifest.sig')
+              assert hashlib.sha256(raw).hexdigest()=='0f4edbaa93deb2e037349b09a368ab46ba659c0944af27293c88bdf301d2bc25'
+              m=json.loads(raw)
+              assert m['schema']==1 and m['appId']=='app.ii.phone'
+              assert m['nativeBuild']==15 and m['sequence']==57 and m['resourceId']=='rabbit-resource-057'
+              assert m['baseDigest']=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              files=m['files']
+              assert len(files)==322 and 'index.html' in files
+              assert not any(name.startswith('sodam/') for name in files)
+              with tempfile.TemporaryDirectory() as d:
+                  manifest=pathlib.Path(d)/'manifest.json'
+                  signature=pathlib.Path(d)/'manifest.sig'
+                  manifest.write_bytes(raw)
+                  signature.write_bytes(sig)
+                  subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature',str(signature),str(manifest)],check=True)
+              for name in names:
+                  assert not name.startswith('/') and '\\' not in name and ':' not in name
+                  assert all(part not in ('','.','..') for part in name.split('/'))
+                  if name in ('manifest.json','manifest.sig'): continue
+                  assert name.startswith('www/') and name[4:] in files
+                  assert hashlib.sha256(z.read(name)).hexdigest()==files[name[4:]]
+              pathlib.Path('/tmp/rabbit-resource-057-notes.md').write_text('# Rabbit Float 资源057\\n\\n'+m['notes'],encoding='utf-8')
+          print('Verified original signature, all assets and cumulative Build15 manifest.')
+          PY
+      - name: Publish one non-draft GitHub release for in-app pull update
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view resource-057 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'Resource 057 already exists; refusing to overwrite.'
+            exit 0
+          fi
+          gh release create resource-057 /tmp/rabbit-float-build15-resource-057.zip \
+            --repo "$GH_REPO" \
+            --title '资源更新057 · 独立反查手机浏览器绑定' \
+            --notes-file /tmp/rabbit-resource-057-notes.md \
+            --latest
