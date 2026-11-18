@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.incoming/rabbit-float-build15-resource-051.zip'
+      - '.incoming/rabbit-float-build15-resource-051.part02'
 
 permissions:
   contents: write
@@ -23,6 +23,25 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
+      - name: Reassemble signed ZIP without modifying its bytes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          first=Path('.incoming/rabbit-float-build15-resource-051.part01')
+          second=Path('.incoming/rabbit-float-build15-resource-051.part02')
+          assert first.is_file() and second.is_file(), 'Both parts are required; upload part01 and part02 together'
+          assert first.stat().st_size==14680064 and second.stat().st_size==11938327, 'Unexpected split sizes'
+          import hashlib
+          assert hashlib.sha256(first.read_bytes()).hexdigest()=='57ede8e0603388562cbc5f0a19dc62a3eac24986fb1429549d5573f9e49d17a7'
+          assert hashlib.sha256(second.read_bytes()).hexdigest()=='42fd4a273368aa24cdc4e7d194359a54801b9b4e2b41b608389704c46ce920be'
+          output=Path('.incoming/rabbit-float-build15-resource-051.zip')
+          with output.open('wb') as out:
+              for part in (first,second):
+                  with part.open('rb') as stream:
+                      for block in iter(lambda:stream.read(1024*1024),b''):
+                          out.write(block)
+          print('Reassembled original RSA-signed update:',output.stat().st_size)
+          PY
       - name: Verify original signature, APK baseline and every payload
         run: |
           echo '859825fed495502d7fdbc42e8bd051fe6affe4ad0e1d5732f0e31e2b97b20bd4  .incoming/rabbit-float-build15-resource-051.zip' | sha256sum --check
@@ -72,6 +91,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm -f -- .incoming/rabbit-float-build15-resource-051.zip
+          git rm -f -- .incoming/rabbit-float-build15-resource-051.part01 .incoming/rabbit-float-build15-resource-051.part02
           git commit -m "chore: clear published 051 staging ZIP [skip ci]"
           git push origin HEAD:main
