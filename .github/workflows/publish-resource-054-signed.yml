@@ -1,0 +1,96 @@
+name: Publish resource 054 original signed update
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.incoming/rabbit-float-build15-resource-054.part02'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resource-054-verified-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Reassemble signed ZIP without modifying its bytes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          first=Path('.incoming/rabbit-float-build15-resource-054.part01')
+          second=Path('.incoming/rabbit-float-build15-resource-054.part02')
+          assert first.is_file() and second.is_file(), 'Both parts are required; upload part01 and part02 together'
+          assert first.stat().st_size==14680064 and second.stat().st_size==11946776, 'Unexpected split sizes'
+          import hashlib
+          assert hashlib.sha256(first.read_bytes()).hexdigest()=='b069022bc8cfa318bf5ef8181bf824b2ad676da01bcd482d393afbd98d6ce124'
+          assert hashlib.sha256(second.read_bytes()).hexdigest()=='505c1fcc42ff93577d3fd4dae9db2e1b4068da3c9c8131308123fe737b04744d'
+          output=Path('.incoming/rabbit-float-build15-resource-054.zip')
+          with output.open('wb') as out:
+              for part in (first,second):
+                  with part.open('rb') as stream:
+                      for block in iter(lambda:stream.read(1024*1024),b''):
+                          out.write(block)
+          print('Reassembled original RSA-signed update:',output.stat().st_size)
+          PY
+      - name: Verify original signature, APK baseline and every payload
+        run: |
+          echo '7e0ba7738d93e7b9b8a3924b3ae5600167db6868f31185f6367c31baa5f0cfbd  .incoming/rabbit-float-build15-resource-054.zip' | sha256sum --check
+          python3 - <<'PY'
+          import zipfile, json, hashlib, pathlib, tempfile, subprocess
+          pkg=pathlib.Path('.incoming/rabbit-float-build15-resource-054.zip')
+          with zipfile.ZipFile(pkg) as z:
+              assert z.testzip() is None, 'Corrupt signed update ZIP'
+              names=z.namelist()
+              assert len(names)==len(set(names)) and len(names)<=5002, 'Bad ZIP entry count'
+              assert 'manifest.json' in names and 'manifest.sig' in names
+              raw=z.read('manifest.json'); sig=z.read('manifest.sig')
+              assert hashlib.sha256(raw).hexdigest()=='6b67b71b23c9eef877814c5879938d2de522b1e2385bec4d03d257fcdf745098', 'Unexpected manifest digest'
+              manifest=json.loads(raw)
+              assert manifest.get('schema')==1 and manifest.get('appId')=='app.ii.phone'
+              assert manifest.get('nativeBuild')==15 and manifest.get('sequence')==54 and manifest.get('resourceId')=='rabbit-resource-054'
+              assert manifest.get('baseDigest')=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              files=manifest.get('files',{})
+              assert isinstance(files,dict) and len(files)==440 and 'index.html' in files
+              assert len(names)==127, 'Unexpected entry count'
+              with tempfile.TemporaryDirectory() as d:
+                  message=pathlib.Path(d,'manifest.json'); message.write_bytes(raw)
+                  signature=pathlib.Path(d,'manifest.sig'); signature.write_bytes(sig)
+                  subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature',str(signature),str(message)],check=True)
+              for name in names:
+                  assert not name.startswith('/') and '\\' not in name and ':' not in name and all(p not in ('','.','..') for p in name.split('/')), 'Unsafe archive path'
+                  if name in ('manifest.json','manifest.sig'):continue
+                  assert name.startswith('www/') and name[4:] in files, 'Undeclared asset'
+                  assert z.getinfo(name).file_size<=128*1024*1024
+                  assert hashlib.sha256(z.read(name)).hexdigest()==files[name[4:]],'Asset SHA-256 mismatch: '+name
+          print('Resource054 original signature and 125 changed assets verified')
+          PY
+      - name: Publish checked signed ZIP to the existing APK update channel
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view resource-054 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'resource-054 already exists; refusing to overwrite or republish'
+            exit 1
+          fi
+          gh release create resource-054 .incoming/rabbit-float-build15-resource-054.zip \
+            --repo "$GH_REPO" \
+            --title "资源更新054 · 小谈快照与锁屏修复" \
+            --notes "Android 1.0.13 / Build 15 正式累计资源 054。采用分享版锁屏首屏预加载；统一全局 APP 绑定图标为灰色；修复小谈小本子进店前后位置，快照显示实际塔罗牌面，用户提问后短暂停留再自动抽牌。累计包含 053、052、051 及此前所有更新。保留原 APK 包名、原签名和已有用户数据，不需卸载重装。进入 设置 → 关于与更新 → 检查更新 获取最新 054。" \
+            --latest
+      - name: Remove temporary signed ZIP from repository after release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f -- .incoming/rabbit-float-build15-resource-054.part01 .incoming/rabbit-float-build15-resource-054.part02
+          git commit -m "chore: clear published 054 staging ZIP [skip ci]"
+          git push origin HEAD:main
