@@ -1,10 +1,11 @@
-# 054 完整版累计资源 · 原签名包上传区
+# 资源 055 · 从完整版移除小谈占卜店
 
-请在本文件夹通过 GitHub **Add file → Upload files**，一次选中并提交下面两份文件到 main：
+本次签名包 **4.05 MB**，不需要分片。
 
-- `rabbit-float-build15-resource-054.part01`（14,680,064 字节）
-- `rabbit-float-build15-resource-054.part02`（11,946,776 字节）
+请在此文件夹通过 GitHub **Add file → Upload files** 上传一个文件：
 
-不能改名、解压或重新压缩。提交 part02 将触发 `publish-resource-054-signed.yml`：合并后严格核对 ZIP 哈希、原 APK RSA 公钥签名、Build 15 基线、54 资源版本及全部 125 个变更文件哈希，然后创建正式 `resource-054` Release，成功后清理暂存文件。
+`rabbit-float-build15-resource-055.zip`
 
-切勿上传任何私钥、签名密码、p12 文件或 `float-android-signing-PRIVATE.zip`。
+提交到 `main` 后自动运行 `publish-resource-055-signed.yml`，验证完整 ZIP SHA-256、原 Build 15 RSA 签名、全部文件哈希及不包含小谈素材的资源清单。通过后发布 `resource-055` Release，并清理暂存 ZIP。
+
+055 保留锁屏预加载、推名片、全局 APP 绑定和相册修复。小谈完整代码与素材在源码仓库的 `archive/sodam-full-resource-054` 分支，未来需要时可恢复。此仓库不得上传私钥、p12 或密码文件。
