@@ -1,0 +1,81 @@
+name: Publish resource 055 - retire Sodam, retain other fixes
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.incoming/rabbit-float-build15-resource-055.zip'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: resource-055-verified-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify exact original RSA-signed Build15 resource055
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'ab7e148c3329e88e19bf9980fc1268ad6dc92a5d2344eec65b2042600636aa1d  .incoming/rabbit-float-build15-resource-055.zip' | sha256sum --check
+          python3 - <<'PY'
+          import zipfile, hashlib, json, subprocess, tempfile, pathlib
+          p=pathlib.Path('.incoming/rabbit-float-build15-resource-055.zip')
+          assert p.is_file() and p.stat().st_size==4052832
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              names=z.namelist()
+              assert len(names)==9 and len(set(names))==9
+              assert 'manifest.json' in names and 'manifest.sig' in names
+              raw=z.read('manifest.json')
+              assert hashlib.sha256(raw).hexdigest()=='93bebbb3306b82a22f0a74f70b655bb41df014f826bb0fff818d872350899b55'
+              sig=z.read('manifest.sig')
+              m=json.loads(raw)
+              assert m.get('schema')==1 and m.get('appId')=='app.ii.phone'
+              assert m.get('nativeBuild')==15 and m.get('sequence')==55 and m.get('resourceId')=='rabbit-resource-055'
+              assert m.get('baseDigest')=='2f0f0e8870fbb1f9732ea7197c11a811a71adeb66225de28b62aba6ccfe662ad'
+              files=m.get('files',{})
+              assert isinstance(files,dict) and len(files)==322 and 'index.html' in files
+              assert not any(s.startswith('sodam/') for s in files)
+              with tempfile.TemporaryDirectory() as tmp:
+                  path=pathlib.Path(tmp)
+                  (path/'manifest.json').write_bytes(raw)
+                  (path/'manifest.sig').write_bytes(sig)
+                  subprocess.run(['openssl','dgst','-sha256','-verify','publisher/public-key.pem','-signature',str(path/'manifest.sig'),str(path/'manifest.json')],check=True)
+              for name in names:
+                  assert not name.startswith('/') and '\\' not in name and ':' not in name and all(x not in ('','.','..') for x in name.split('/'))
+                  if name in ('manifest.json','manifest.sig'):continue
+                  assert name.startswith('www/') and name[4:] in files and not name.startswith('www/sodam/')
+                  assert z.getinfo(name).file_size <= 128*1024*1024
+                  assert hashlib.sha256(z.read(name)).hexdigest()==files[name[4:]]
+          print('Resource 055 verified; no Sodam content in new resource manifest')
+          PY
+      - name: Publish resource 055 release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view resource-055 --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'resource-055 already exists. Refusing to overwrite existing release.'
+            exit 1
+          fi
+          gh release create resource-055 .incoming/rabbit-float-build15-resource-055.zip \
+            --repo "$GH_REPO" \
+            --title "资源更新055 · 撤下小谈占卜店" \
+            --notes "Android 1.0.13 / Build 15 累计资源055。完整移除内置小谈占卜店的桌面入口、交互、小本子、快照与占卜素材，保留之前更新的锁屏壁纸首屏预加载、推名片和好友申请、全局App绑定以及相册UI修复。小谈完整源码和素材已备份在完整版源码仓库 archive/sodam-full-resource-054 分支，未来可恢复开发。保留其他用户资料，不需要卸载重装。"
+      - name: Remove release upload staging ZIP
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -f -- .incoming/rabbit-float-build15-resource-055.zip
+          git commit -m "chore: remove published 055 staging ZIP [skip ci]"
+          git push origin HEAD:main
