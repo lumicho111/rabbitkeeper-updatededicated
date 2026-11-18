@@ -3,7 +3,7 @@
 将下面两份文件在 **同一次 GitHub 网页上传提交**中放到此文件夹：
 
 - `rabbit-float-build15-resource-052.part01`（14,680,064 字节）
-- `rabbit-float-build15-resource-052.part02`（11,938,754 字节）
+- `rabbit-float-build15-resource-052.part02`（11,938,770 字节）
 
 在此目录 **Add file → Upload files**，一次选择两个文件，提交到 `main`。不要改名，不要解压。上传 `part02` 将自动触发 `publish-resource-052-signed.yml`，精确校验两段 SHA-256、拼接后原始完整 ZIP、原 APK RSA 公钥签名、manifest 和每个资源哈希；通过后创建正式 `resource-052` Release 并清理暂存文件。
 
