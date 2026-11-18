@@ -30,10 +30,10 @@ jobs:
           first=Path('.incoming/rabbit-float-build15-resource-052.part01')
           second=Path('.incoming/rabbit-float-build15-resource-052.part02')
           assert first.is_file() and second.is_file(), 'Both parts are required; upload part01 and part02 together'
-          assert first.stat().st_size==14680064 and second.stat().st_size==11938754, 'Unexpected split sizes'
+          assert first.stat().st_size==14680064 and second.stat().st_size==11938770, 'Unexpected split sizes'
           import hashlib
-          assert hashlib.sha256(first.read_bytes()).hexdigest()=='8c6d8ed7a5f5d43bbdfcda10e18c9d5924d2493ed86e779dd56029fbeade6b91'
-          assert hashlib.sha256(second.read_bytes()).hexdigest()=='1fc42b0e25c511bf739461fde6f96b6f7432cadea168ffc32fcac95feb8d23fd'
+          assert hashlib.sha256(first.read_bytes()).hexdigest()=='15773282e00915d0f8394bdadb4650ca9ae85d9711f75b673dbc42c9266bbdb8'
+          assert hashlib.sha256(second.read_bytes()).hexdigest()=='39102f9228395f83501bba245d20ffb551a3a09de68347a2bcf2c8418332a5a8'
           output=Path('.incoming/rabbit-float-build15-resource-052.zip')
           with output.open('wb') as out:
               for part in (first,second):
@@ -44,7 +44,7 @@ jobs:
           PY
       - name: Verify original signature, APK baseline and every payload
         run: |
-          echo '73dfccf8fef860ad3daeb148aa38632e4d54a166b61c63e8b33e43198c1ef210  .incoming/rabbit-float-build15-resource-052.zip' | sha256sum --check
+          echo '1ec57f287c7dfa1323d73d8e8c147f975eaa56c63a2a8b85ae01b739981318ce  .incoming/rabbit-float-build15-resource-052.zip' | sha256sum --check
           python3 - <<'PY'
           import zipfile, json, hashlib, pathlib, tempfile, subprocess
           pkg=pathlib.Path('.incoming/rabbit-float-build15-resource-052.zip')
@@ -54,7 +54,7 @@ jobs:
               assert len(names)==len(set(names)) and len(names)<=5002, 'Bad ZIP entry count'
               assert 'manifest.json' in names and 'manifest.sig' in names
               raw=z.read('manifest.json'); sig=z.read('manifest.sig')
-              assert hashlib.sha256(raw).hexdigest()=='4654fa55ce3b5bb46d5bae23faa1bc1768ef06c28c2ccb7d68260b955776a350', 'Unexpected manifest digest'
+              assert hashlib.sha256(raw).hexdigest()=='989a2d374d4a5ec6614f59e01c53cd09137977898bdf8539fbedb06c63d8b4f9', 'Unexpected manifest digest'
               manifest=json.loads(raw)
               assert manifest.get('schema')==1 and manifest.get('appId')=='app.ii.phone'
               assert manifest.get('nativeBuild')==15 and manifest.get('sequence')==52 and manifest.get('resourceId')=='rabbit-resource-052'
